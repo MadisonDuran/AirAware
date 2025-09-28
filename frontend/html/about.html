@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AirWatch — About</title>
+    <link rel="stylesheet" href="/frontend/css/about.css" />
+</head>
+
+<body>
+    <!-- Simple fixed nav -->
+    <nav>
+        <ul class="sidebar">
+            <li onclick="hideSidebar()">
+                <a><img src="/frontend/html/images/close_sidebar.png" alt="close sidebar icon" /></a>
+            </li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#"> Air Quality Data</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <ul>
+            <li>
+                <a href="#" ><img src="/frontend/html/images/logo.png" alt="" class="logo"></a>
+            </li>
+            <li class="hideMobile">
+                <a href="#"> Home</a>
+            </li>
+            <li class="hideMobile">
+                <a href="#">Air Quality Data</a>
+            </li>
+            <li class="hideMobile">
+                <a href="#">About us </a>
+            </li>
+            <li class="hideMobile">
+                <a href="#">Contact </a>
+            </li>
+            <li class="menu-btn" onclick="showSidebar()">
+                <a><img src="/frontend/html/images/sidebar.png" alt="sidebar icon" /></a>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="page">
+        <div class="container">
+            <!-- HERO -->
+            <section id="about" class="hero">
+                <div class="hero-image" aria-hidden="true"></div>
+                <div class="hero-text">
+                    <div class="about-team"><h1>About AirAware</h1></div>
+                    
+                    <div class="card">
+                        <h2 class="card-title">Mission Statement</h2>
+                        <p>
+                            <strong>AirAware </strong>is dedicated to empowering communities with transparent
+                            air-quality data, turning
+                            complex information into clear insights that protect health, promote equity, and inspire
+                            education. By combining innovation with integrity, we strive to create accessible tools that
+                            help people make informed decisions, reduce risks, and build a cleaner, fairer future for
+                            all.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VALUES -->
+            <section class="values">
+                <div class="card">
+                    <h3 class="card-title">Core Values</h3>
+                    <p>
+                        <strong>Transparency:</strong> We believe in open, accessible data
+                        that empowers everyone to understand air quality in their area.
+                    </p>
+                    <p>
+                        <strong>Accuracy:</strong> Our monitoring systems use reliable
+                        methods to provide consistent measurements.
+                    </p>
+                    <p>
+                        <strong>Community Impact:</strong> We work with local communities
+                        to address air pollution and promote environmental health.
+                    </p>
+                    <p>
+                        <strong>Innovation:</strong> We improve our tools to better serve
+                        public health and environmental protection.
+                    </p>
+                </div>
+                <div class="values-image" aria-hidden="true"></div>
+            </section>
+
+            <!-- TEAM -->
+            <section class="team">
+                <div class="about-team"><h2>Our Team</h2></div>
+                
+                <div class="team-grid">
+                    <article class="team-card">
+                        <img src="/frontend/html/images/madison.jpg" class="avatar" alt="" />
+                        <div class="name">Madison Duran</div>
+                        <div class="role">Full Stack Engineer</div>
+                    </article>
+                    <article class="team-card">
+                        <img src="/frontend/html/images/edgardo.jpg" class="avatar" alt="" />
+                        <div class="name">Edgardo Torres</div>
+                        <div class="role">Full Stack Engineer</div>
+                    </article>
+                    <article class="team-card">
+                        <img src="/frontend/html/images/Thanh.png" class="avatar" alt="" />
+                        <div class="name">Thanh Nay</div>
+                        <div class="role">Full Stack Engineer</div>
+                    </article>
+                    <article class="team-card">
+                        <img src="/frontend/html/images/ana.png" class="avatar" alt="" />
+                        <div class="name">Ana Noyola</div>
+                        <div class="role">Full Stack Engineer</div>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </main>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <!-- Left side -->
+            <div class="footer-logo">
+                <h3>AirAware</h3>
+                <p>Real-time air quality insights for healthier communities.</p>
+            </div>
+
+            <!-- Middle: links -->
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#data">Air Quality Data</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Right: contact -->
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p>Email: info@airAware.org</p>
+                <p>Phone: (123) 456-7890</p>
+                <p>Location: Charlotte, NC</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 AirAware. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="/frontend/js/main.js"></script>
+</body>
+
+</html>

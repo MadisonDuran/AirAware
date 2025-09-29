@@ -1,0 +1,86 @@
+/* Body Styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-image: linear-gradient(to right, #cce0ff, #0052cc , #002966);
+        color: #333;
+        line-height: 1.6;
+    }
+
+    /* Header Styles & Footer Styles */
+    #shared__header, #shared__footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+    }
+
+    /* Main Section Styles */
+    #top-main__section, #bottom-main__section{
+        text-align: center;
+        padding: 50px 20px;
+        background-color: white;
+        margin: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px black;
+        display: flex;
+        justify-content: space-between;
+        padding-top: 1em;
+    }
+    #bottom-main__section {
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+    }
+
+    /* Card Styles */
+    #airaware-card__info{
+        text-align: left;
+        padding: 20px;
+        width: 50%;
+    }
+
+    /* Header Title Styles */
+    #header__title{
+        font-size: 36px;
+        margin-bottom: 10px;
+        color: #001f4d;
+    }
+
+    /* Info Description Styles */
+    .info-description{
+        font-size: 18px;
+        color: #333333;
+    }
+
+    /* Image Styles */
+    #pollution-img{
+        height: 30em;
+        width: auto;
+        box-shadow: 0 2px 4px black;
+        border-radius: 80% 33% 20% 56% / 42% 68% 32% 58%;  /* horizontal, vertical: blob shape */
+        /* top-left conrner: 80% horizontal, 42% vertical */
+        /* top-right conrner: 33% horizontal, 68% vertical */
+        /* bottom-right conrner: 20% horizontal, 32% vertical */
+        /* bottom-left conrner: 56% horizontal, 58% vertical */
+    }
+    #warehouse-img {
+        height: 30em;
+        width: 60em;
+        border-radius: 8px;
+    }
+
+    /* Button Styles */
+    button{
+        background-color: firebrick;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin-top: 30px;;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    /* Button Hover Effect */
+    button:hover{
+        background-color: darkred;
+    }

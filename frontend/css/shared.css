@@ -1,0 +1,154 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Navbar */
+nav {
+  background-color: white;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+  position: sticky; /* keeps it visible */
+  top: 0;
+  z-index: 100;
+}
+/* Navbar Items */
+nav ul {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+/* Navbar Links */
+nav li {
+  height: 3.5rem;
+}
+/* Navbar Link Styles */
+nav a {
+  height: 100%;
+  font-size: 1rem;
+  padding: 0 1.2rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: black;
+}
+/* Navbar Link Hover Effect */
+nav a:hover {
+  background-color: #f0f0f0;
+}
+/* Align first nav item (logo) to the left */
+nav li:first-child {
+  margin-right: auto;
+}
+
+/* Logo Styles */
+.logo {
+  height: 90px;
+  font-weight: bold;
+  color: #27ae60;
+  mix-blend-mode: multiply;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 25rem;
+  z-index: 999;
+  background-color: rgba(255, 255, 255, 0.181);
+  backdrop-filter: blur(10px);
+  box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+/* Sidebar Items */
+.sidebar li {
+  width: 100%;
+}
+/* Sidebar Links */
+.sidebar a {
+  width: 100%;
+}
+/* Sidebar Link Hover Effect */
+.menu-btn {
+  display: none;
+}
+
+/* FOOTER */
+.footer {
+  background: #2c3e50; /* dark footer */
+  color: #ffffff;
+  margin-top: 40px;
+  padding: 40px 20px 20px;
+}
+
+
+
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.footer-logo h3 {
+  color: #27ae60;
+  margin-bottom: 8px;
+}
+
+.footer-logo p {
+  font-size: 14px;
+  color: #d1d5db;
+}
+
+.footer-links h4,
+.footer-contact h4 {
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 6px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #d1d5db;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: #27ae60;
+}
+
+.footer-contact p {
+  font-size: 14px;
+  color: #d1d5db;
+  margin-bottom: 6px;
+}
+
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid #444;
+  margin-top: 20px;
+  padding-top: 12px;
+  font-size: 13px;
+  color: #9ca3af;
+}

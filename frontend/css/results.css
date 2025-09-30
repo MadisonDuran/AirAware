@@ -1,0 +1,93 @@
+/* Search Section Styles */
+#search-section{
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #eee;
+
+}
+#header__title{
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #001f4d;
+}
+#search-bar{
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+}
+#search-btn{
+    width: 15%;
+    padding: 10px;
+    background-color: #001f4d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#search-btn:hover{
+    background-color: #0052cc;
+;
+}
+
+/* Container Styles */
+.info-data__container{
+    text-align: center;
+    padding: 50px 20px;
+    background-color: white;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 1em;
+}
+
+/* Pie Chart Styles */
+.pie-data__container{   /* Pie chart colors */
+    position: relative;
+    margin-top: 2em;
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    background: conic-gradient(
+        #F47A1F 0% 60%,     /* Pollution */
+        #FDBB2F 60% 80%,   /* Pollen */
+        #377B2B 80% 90%,   /* AQI */
+        #7AC142 90% 100%   /* Other */
+    );
+}
+.chart-label{   /* Percentage number center */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    background: whitesmoke;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+.portions-data__container{  /* Portion labels next to the pie chart */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 20px;
+}
+
+.portion-item{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+}

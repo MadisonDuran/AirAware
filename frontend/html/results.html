@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="frontend/css/homepage.css">
-    <link rel="stylesheet" href="frontend/css/shared.css">
-    <link rel="icon" type="image/png" href="frontend/img/AirAware_icon.png">
-    <title>Homepage</title>
+    <link rel="stylesheet" href="../css/shared.css">
+    <link rel="stylesheet" href="../css/results.css">
+    <link rel="icon" type="image/png" href="../img/AirAware_icon.png">
+    <title>Air Quality Results</title>
 </head>
-
+<body>
+    
 <!-- Shared Header -->
 <header class="shared__header">
         <!-- Navigation -->
@@ -17,8 +18,8 @@
             <li onclick="hideSidebar()">
                 <a><img src="/frontend/html/images/close_sidebar.png" alt="close sidebar icon" /></a>
             </li>
-            <li><a href="#">Home</a></li>
-            <li><a href="#"> Air Quality Data</a></li>
+            <li><a href="AirAware/index.html">Home</a></li>
+            <li><a href="AirAware/frontend/html/results.html"> Air Quality Data</a></li>
             <li><a href="#">About us</a></li>
             <li><a href="#">Contact</a></li>
         </ul>
@@ -47,33 +48,46 @@
 
 <!-- Main Content -->
     <main>
-        <!-- Top Section -->
-        <section id="top-main__section">
-            <!-- AirAware Card -->
-            <div id="airaware-card__info">
-                <h1 id="header__title">AirAware: Breathing Smarter Together</h1>
-                <p id="airaware-description">AirAware is a platform that delivers real-time air quality data, helping users stay informed about the conditions in their surroundings. 
-                    By monitoring pollution levels and highlighting the impact on individuals, AirAware empowers communities to make healthier choices. By recognizing the state of our environment, we can educate ourselves, 
-                    embrace innovation, and adapt to emerging technologies that support a cleaner future. </p>
-                <button id="click-more-btn">Click More</button>
-            </div>
-            <!-- AirAware Image -->
-            <div id="airaware-card__img">
-                <img id="pollution-img" src="frontend/img/pollution.jpg" alt="woman standing in field with wind turbines (photo from pixabay)">
+        <section id="search-section">
+            <h1 id="header__title">Air Quality Data</h1>
+            <input type="search" id="search-bar" placeholder="Enter location..." />
+            <button id="search-btn">Search</button>
+        </section>
+        
+        <section id="top-data__section">
+            <div class="info-data__container">
+                <h2>Air Pollution</h2>
+                <p>Status: High</p>
+                <p>Tree pollen: 150 (High)</p>
+                <p>Grass pollen: 80 (Moderate)</p>
             </div>
         </section>
 
-        <!-- Bottom Section -->
-        <section id="bottom-main__section">
-            <!-- Awareness Image -->
-            <div id="awareness-card__img">
-                <img id="warehouse-img" src="frontend/img/skyview.jpg" alt="smokes coming from a warehouse (photo from pexels)">
+        <section id="bottom-data__section">
+            <div class="info-data__container">
+                <h2>Air Quality Index (AQI)</h2>
+                <p><strong>AQI:</strong> 75 (Moderate)</p>
             </div>
-            <!-- Awareness Card -->
-            <div id="awareness-card__info">
-                <p id="awareness-description">The air we breathe matters. Around the world, pollution is shaping the atmosphere we live in and raising awareness of these issues is essential to understanding their impact on our daily lives. 
-                By understanding our environment, we can make more informed choices, embrace innovation, and utilize technology to build a cleaner future. We're using real-time data and advanced monitoring tools 
-                to measure, improve, and promote cleaner air in our communities. We can work together to build a cleaner environment and a brighter tomorrow.</p>
+        </section>
+
+        <section id="pie-results__section">
+            <div class="info-data__container">
+                <h2 id="location">Charlotte</h2>
+                <h3 id="region">North Carolina</h3>
+
+                <div class="pie-data__container">
+                    <div class="chart-label">25%</div>
+                </div>
+
+                <div class="portions-data__container">
+                    <div class="portion-item">Pollution -60%</div>
+                    <div class="portion-item">Pollen -30%</div>
+                    <div class="portion-item">AQI -10%</div>
+                    <div class="portion-item">Other -5%</div>
+                </div>
+
+                <h3 id="status">Good</h3>
+                <p id="message">You can breathe easily in this area</p>
             </div>
         </section>
     </main>
@@ -112,4 +126,5 @@
             <p>&copy; 2025 AirAware. All rights reserved.</p>
         </div>
     </footer>
+</body>
 </html>

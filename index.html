@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="frontend/css/homepage.css">
+    <link rel="stylesheet" href="frontend/css/shared.css">
+    <link rel="icon" type="image/png" href="frontend/img/AirAware_icon.png">
+    <title>Homepage</title>
+</head>
+
+<!-- Shared Header -->
+<header class="shared__header">
+        <!-- Navigation -->
+        <nav>
+        <ul class="sidebar">
+            <li onclick="hideSidebar()">
+                <a><img src="/frontend/html/images/close_sidebar.png" alt="close sidebar icon"/></a>
+            </li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="frontend/html/results.html">Air Quality Data</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <ul>
+            <li>
+                <a href="#"><img src="frontend/img/AirAware.png" alt="AirAware logo" class="logo"></a>
+            </li>
+            <li class="hideMobile">
+                <a href="#"> Home</a>
+            </li>
+            <li class="hideMobile">
+                <a href="#">Air Quality Data</a>
+            </li>
+            <li class="hideMobile">
+                <a href="#">About us </a>
+            </li>
+            <li class="hideMobile">
+                <a href="#">Contact </a>
+            </li>
+            <li class="menu-btn" onclick="showSidebar()">
+                <a><img src="/frontend/html/images/sidebar.png" alt="sidebar icon" /></a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main Content -->
+    <main>
+        <!-- Top Section -->
+        <section id="top-main__section">
+            <!-- AirAware Card -->
+            <div id="airaware-card__info">
+                <h1 id="header__title">AirAware: Breathing Smarter Together</h1>
+                <p id="airaware-description">AirAware is a platform that delivers real-time air quality data, helping users stay informed about the conditions in their surroundings. 
+                    By monitoring pollution levels and highlighting the impact on individuals, AirAware empowers communities to make healthier choices. By recognizing the state of our environment, we can educate ourselves, 
+                    embrace innovation, and adapt to emerging technologies that support a cleaner future. </p>
+                <button id="click-more-btn">Click More</button>
+            </div>
+            <!-- AirAware Image -->
+            <div id="airaware-card__img">
+                <img id="pollution-img" src="frontend/img/pollution.jpg" alt="woman standing in field with wind turbines (photo from pixabay)">
+            </div>
+        </section>
+
+        <!-- Bottom Section -->
+        <section id="bottom-main__section">
+            <!-- Awareness Image -->
+            <div id="awareness-card__img">
+                <img id="warehouse-img" src="frontend/img/skyview.jpg" alt="smokes coming from a warehouse (photo from pexels)">
+            </div>
+            <!-- Awareness Card -->
+            <div id="awareness-card__info">
+                <p id="awareness-description">The air we breathe matters. Around the world, pollution is shaping the atmosphere we live in and raising awareness of these issues is essential to understanding their impact on our daily lives. 
+                By understanding our environment, we can make more informed choices, embrace innovation, and utilize technology to build a cleaner future. We're using real-time data and advanced monitoring tools 
+                to measure, improve, and promote cleaner air in our communities. We can work together to build a cleaner environment and a brighter tomorrow.</p>
+            </div>
+        </section>
+    </main>
+
+<!-- Shared Footer -->
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <!-- Left side -->
+            <div class="footer-logo">
+                <h3>AirAware</h3>
+                <p>Real-time air quality insights for healthier communities.</p>
+            </div>
+
+            <!-- Middle: links -->
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#data">Air Quality Data</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Right: contact -->
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p>Email: info@airAware.org</p>
+                <p>Phone: (123) 456-7890</p>
+                <p>Location: Charlotte, NC</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 AirAware. All rights reserved.</p>
+        </div>
+    </footer>
+</html>

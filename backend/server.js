@@ -21,7 +21,6 @@ const countriesRoute = require('./routes/countries');
 const manufacturersRoute = require('./routes/manufacturers');
 const instrumentsRoute = require('./routes/instruments');
 const submissionsRoute = require('./routes/submissions');
-app.use('/api/submissions', submissionsRoute);
 
 
 app.use('/api/countries', countriesRoute);

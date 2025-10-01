@@ -4,6 +4,7 @@ console.log("instruments route loaded from backend/routes/instruments.js");
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
+const searchRoutes = require('./routes/search');
 require('dotenv').config();
 
 const app = express();
@@ -11,6 +12,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+app.use('/api/search', searchRoutes);
 
 // Test route (make sure server responds)
 app.get('/api/test', (req, res) => {

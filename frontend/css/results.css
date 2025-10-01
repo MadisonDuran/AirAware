@@ -1,3 +1,10 @@
+/* Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-image: linear-gradient(to right, #cce0ff, #0052cc , #002966);
+    color: #333;
+    line-height: 1.6;
+}
 /* Search Section Styles */
 #search-section{
     padding: 20px;
@@ -29,10 +36,6 @@
 #search-btn:hover{
     background-color: #0052cc;
 }
-main{
-    background-image: linear-gradient(to right, #CCE0FF, #0052CC , #002966);
-}
-
 /* Container Styles */
 .info-data__container{
     text-align: center;

@@ -1,0 +1,156 @@
+/* Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-image: linear-gradient(to right, #cce0ff, #0052cc , #002966);
+    color: #333;
+    line-height: 1.6;
+}
+/* Main Section Styles */
+#top-main__section, #bottom-main__section{
+    text-align: center;
+    padding: 50px 20px;
+    background-color: white;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px black;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1em;
+}
+#bottom-main__section {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+/* Card Styles */
+#airaware-card__info{
+    text-align: left;
+    padding: 20px;
+    width: 50%;
+}
+
+/* Header Title Styles */
+#header__title{
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #001f4d;
+}
+
+/* Info Description Styles */
+#airaware-description, #awareness-description{
+    font-size: 20px;
+    color: #333333;
+}
+
+/* Image Styles */
+#pollution-img{
+    height: 30em;
+    width: 45em;
+    box-shadow: 0 2px 4px black;
+    border-radius: 80% 33% 20% 56% / 42% 68% 32% 58%;  /* horizontal, vertical: blob shape */
+    /* top-left conrner: 80% horizontal, 42% vertical */
+    /* top-right conrner: 33% horizontal, 68% vertical */
+    /* bottom-right conrner: 20% horizontal, 32% vertical */
+    /* bottom-left conrner: 56% horizontal, 58% vertical */
+}
+#warehouse-img {
+    height: 30em;
+    width: 60em;
+    border-radius: 8px;
+}
+
+/* Button Styles */
+button{
+    background-color: firebrick;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 30px;;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+}
+/* Button Hover Effect */
+button:hover{
+    background-color: darkred;
+}
+
+/* Tablet Responsive Design */
+@media screen and (min-width: 768px) and (max-width: 1440px){
+    #top-main__section{
+        flex-direction: row;
+        align-items: center;
+        gap: 2em;
+    }
+    #bottom-main__section{
+        flex-direction: column;
+        align-items: center;
+    }
+    #airaware-card__info{
+        width: 100%;
+        text-align: center;
+    }
+    #pollution-img{
+        width: 20em;
+        height: 20em;
+        margin-top: 2em;
+        overflow: hidden;
+    }
+    #warehouse-img {
+        width: 35em;
+        height: auto;
+    }
+    #airaware-description, #awareness-description{
+        font-size: 16px;
+    }
+    #header__title{
+        font-size: 28px;
+    }
+}
+
+/* Mobile Responsive Design */
+@media screen and (max-width: 767px) {
+    #top-main__section, #bottom-main__section{
+        flex-direction: column;
+        align-items: center;
+    }
+    #airaware-card__info{
+        width: 100%;
+        text-align: center;
+        position: relative;
+        text-align: center;
+        padding-top: 2em; /* Add padding to avoid overlap with image */
+    }
+    #pollution-img{
+        width: 20em;
+        height: 15em;
+        margin-top: 9em;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1; /* Keep image above other content */
+    }
+    #header__title{
+        font-size: 26px;
+        position: relative;
+        z-index: 2; /* Keep title above the image */
+    }
+    #warehouse-img {
+        width: 20em;
+        height: auto;
+    }
+    #airaware-description{
+        font-size: 16px;
+        margin-top: 12em;
+    }
+    #awareness-description{
+        font-size: 16px;
+    }
+    button{
+        font-size: 16px;
+        padding: 10px 16px;
+    }
+}

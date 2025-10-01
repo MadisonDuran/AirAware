@@ -42,7 +42,7 @@ router.get('/', function _callee(req, res) {
               error: "No response from OpenAQ API"
             });
           } else {
-            // Request setup issue
+            // Request setup issue  
             console.error("Error setting up request:", _context.t0.message);
             res.status(500).json({
               error: _context.t0.message

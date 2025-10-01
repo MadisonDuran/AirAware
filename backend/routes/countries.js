@@ -24,7 +24,7 @@ res.status(error.response.status).json(error.response.data);
 console.error("No response from OpenAQ API");
 res.status(500).json({ error: "No response from OpenAQ API" });
 } else {
-// Request setup issue
+// Request setup issue  
 console.error("Error setting up request:", error.message);
 res.status(500).json({ error: error.message });
 }

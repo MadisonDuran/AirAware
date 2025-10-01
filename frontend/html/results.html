@@ -25,13 +25,13 @@
         </ul>
         <ul>
             <li>
-                <a href="#"><img src="frontend/img/AirAware.png" alt="" class="logo"></a>
+                <a href="AirAware/index.html"><img src="frontend/img/AirAware.png" alt="" class="logo"></a>
             </li>
             <li class="hideMobile">
-                <a href="#"> Home</a>
+                <a href="AirAware/index.html"> Home</a>
             </li>
             <li class="hideMobile">
-                <a href="#">Air Quality Data</a>
+                <a href="AirAware/frontend/html/results.html">Air Quality Data</a>
             </li>
             <li class="hideMobile">
                 <a href="#">About us </a>
@@ -48,48 +48,64 @@
 
 <!-- Main Content -->
     <main>
+        <!--Search Bar-->
         <section id="search-section">
             <h1 id="header__title">Air Quality Data</h1>
             <input type="search" id="search-bar" placeholder="Enter location..." />
             <button id="search-btn">Search</button>
         </section>
-        
+
+        <!-- Context data from the API -->
+        <div class="data-wrapper__content">
+        <!-- Air Quality Index Section -->
         <section id="top-data__section">
             <div class="info-data__container">
-                <h2>Air Pollution</h2>
-                <p>Status: High</p>
-                <p>Tree pollen: 150 (High)</p>
-                <p>Grass pollen: 80 (Moderate)</p>
+                <h2>Air Quality Index (AQI)</h2>
+                <p><strong>Status:</strong> High</p>
+                <p><strong>Tree pollen:</strong> 150 (High)</p>
+                <p><strong>Grass pollen:</strong> 80 (Moderate)</p>
             </div>
         </section>
 
+        <!-- Countries Section -->
         <section id="bottom-data__section">
             <div class="info-data__container">
-                <h2>Air Quality Index (AQI)</h2>
-                <p><strong>AQI:</strong> 75 (Moderate)</p>
+                <h2>Countries</h2>
+                <p><strong>Name:</strong> USA</p>
+                <p><strong>Location:</strong> North America</p>
+                <p><strong>Timezone:</strong> Eastern Daylight Time</p>
             </div>
         </section>
 
+        <!-- Pie Chart Section -->
         <section id="pie-results__section">
+            <!-- Startpoint of the Chart --> 
             <div class="info-data__container">
                 <h2 id="location">Charlotte</h2>
                 <h3 id="region">North Carolina</h3>
-
-                <div class="pie-data__container">
+            
+            <!-- Pie Chart -->
+            <div id ="pie-data__container">
+                <div class="chart-data__container">
                     <div class="chart-label">25%</div>
                 </div>
-
-                <div class="portions-data__container">
-                    <div class="portion-item">Pollution -60%</div>
-                    <div class="portion-item">Pollen -30%</div>
-                    <div class="portion-item">AQI -10%</div>
-                    <div class="portion-item">Other -5%</div>
-                </div>
-
+            
+            <!-- The data/labels items -->
+            <div class="portions-data__container">
+                <div class="portion-item"><div class="portion-color"></div>60% Pollution</div>
+                <div class="portion-item"><div class="portion-color"></div>30% Pollen</div>
+                <div class="portion-item"><div class="portion-color"></div>10% AQI</div>
+                <div class="portion-item"><div class="portion-color"></div>5% Other</div>
+            </div>
+            
+            <!-- Endpoint of the Chart -->    
+            </div>
                 <h3 id="status">Good</h3>
                 <p id="message">You can breathe easily in this area</p>
             </div>
         </section>
+
+        </div>
     </main>
 
 <!-- Shared Footer -->

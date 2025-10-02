@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Subscribe Form</title>
+   <link rel="stylesheet" href="/frontend/css/contact.css">
+</head>
+<body>
+     <!-- Simple fixed nav -->
+    <nav>
+        <ul class="sidebar">
+            <li onclick="hideSidebar()">
+                <a><img src="/frontend/html/images/close_sidebar.png" alt="close sidebar icon" /></a>
+            </li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#"> Air Quality Data</a></li>
+            <li><a href="/frontend/html/about.html">About us</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <ul>
+            <li>
+                <a href="#"><img src="/frontend/html/images/logo.png" alt="" class="logo"></a>
+            </li>
+            <li class="hideMobile">
+                <a href="#"> Home</a>
+            </li>
+            <li class="hideMobile">
+                <a href="#">Air Quality Data</a>
+            </li>
+            <li class="hideMobile">
+                <a href="#">About us </a>
+            </li>
+            <li class="hideMobile">
+                <a href="/frontend/html/about.html">Contact </a>
+            </li>
+            <li class="menu-btn" onclick="showSidebar()">
+                <a><img src="/frontend/html/images/sidebar.png" alt="sidebar icon" /></a>
+            </li>
+        </ul>
+    </nav>
+
+   <div class="form-container">
+       <h2>Subscribe to Our Newsletter</h2>
+      
+       <form id="subscribeForm">
+           <!-- First Name Field -->
+           <div class="form-group">
+               <label for="firstName">First Name *</label>
+               <input
+                   type="text"
+                   id="firstName"
+                   name="firstName"
+                   required
+               >
+               <span class="error-message" id="firstNameError"></span>
+           </div>
+
+
+           <!-- Last Name Field -->
+           <div class="form-group">
+               <label for="lastName">Last Name *</label>
+               <input
+                   type="text"
+                   id="lastName"
+                   name="lastName"
+                   required
+               >
+               <span class="error-message" id="lastNameError"></span>
+           </div>
+
+
+           <!-- Email Field -->
+           <div class="form-group">
+               <label for="email">Email *</label>
+               <input
+                   type="email"
+                   id="email"
+                   name="email"
+                   required
+               >
+               <span class="error-message" id="emailError"></span>
+           </div>
+
+
+           <!-- Country Field -->
+           <div class="form-group">
+               <label for="country">Country *</label>
+               <select id="country" name="country" required>
+                   <option value="">Select a country</option>
+                   <option value="United States">United States</option>
+                   <option value="Canada">Canada</option>
+                   <option value="United Kingdom">United Kingdom</option>
+                   <option value="Australia">Australia</option>
+                   <option value="Germany">Germany</option>
+                   <option value="France">France</option>
+                   <option value="Spain">Spain</option>
+                   <option value="Italy">Italy</option>
+                   <option value="Mexico">Mexico</option>
+                   <option value="Brazil">Brazil</option>
+                   <option value="Argentina">Argentina</option>
+                   <option value="Japan">Japan</option>
+                   <option value="China">China</option>
+                   <option value="India">India</option>
+                   <option value="Other">Other</option>
+               </select>
+               <span class="error-message" id="countryError"></span>
+           </div>
+
+
+           <!-- Submit Button -->
+           <button type="submit" id="submitBtn">Subscribe</button>
+
+
+           <!-- Success Message -->
+           <div class="success-message" id="successMessage">
+               Thank you for subscribing!
+           </div>
+       </form>
+   </div>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <!-- Left side -->
+            <div class="footer-logo">
+                <h3>AirAware</h3>
+                <p>Real-time air quality insights for healthier communities.</p>
+            </div>
+
+            <!-- Middle: links -->
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#data">Air Quality Data</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Right: contact -->
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p>Email: info@airAware.org</p>
+                <p>Phone: (123) 456-7890</p>
+                <p>Location: Charlotte, NC</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 AirAware. All rights reserved.</p>
+        </div>
+    </footer>
+<script src="/frontend/js/form.js"></script>
+</body>
+</html>

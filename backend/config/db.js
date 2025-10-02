@@ -1,17 +1,12 @@
-// set up node to connect to our database
-const mysql = require('mysql2')
+const mysql = require('mysql2/promise');
 
-const dbconnection = mysql.createConnection({
-    host: "127.0.0.1",
-    user: "root",
-    database: "Air_Aware",
-    password: "password",
-    port: 3306
+const pool = mysql.createPool({
+host: 'localhost',
+user: 'root',
+password: 'password', 
+database: 'Newsletter', 
+port: 3306,
+connectionLimit: 10
 });
 
-dbconnection.connect(err => {
-    if (err) throw err;
-    console.log('Connected to MySQL');
-});
-
-module.exports = dbconnection; 
+module.exports = pool;

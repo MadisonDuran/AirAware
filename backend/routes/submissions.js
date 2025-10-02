@@ -32,8 +32,9 @@ router.post('/', async (req, res) => {
       console.error('create failed:', e);
       res.status(500).json({ error: 'create failed'});
   }
+  console.log('POST /api/submissions body:', req.body);
 });
-console.log('POST /api/submissions body:', req.body);
+
 
 
 // READ (all)

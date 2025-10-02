@@ -10,26 +10,29 @@ const clip = (s, n) => (s ?? '').toString().trim().slice(0, n);
 // CREATE
 router.post('/', async (req, res) => {
   try {
-      let { first_name, last_name, email, country, create_at } = req.body || {};
+      console.log('POST /api/submissions body:', req.body); // Log incoming data
+      let { first_name, last_name, email, country, created_at } = req.body || {};
       first_name = clip(first_name, 100);
       last_name = clip(last_name, 100);
       email = clip(email, 255);
       country = (clip(country, 2) || '').toUpperCase() || null;
-      create_at = create_at || new Date();
+      created_at = created_at || new Date();
 
       if (!first_name) return res.status(400).json({ error: 'first_name is required'});
       if (!email || !isEmail(email)) return res.status(400).json({ error: 'valid email is required'});
       if (!last_name) return res.status(400).json({ error: 'last_name is required'});
       if (!country) return res.status(400).json({ error: 'country is required'});
-      if (!create_at) return res.status(400).json({ error: 'create_at is required'});
+      if (!created_at) return res.status(400).json({ error: 'created_at is required'});
 
-      const row = await m.createSubmission({ first_name, last_name, email, country, create_at });
+      // Debug: log all values before insert
+      console.log('Inserting:', { first_name, last_name, email, country, created_at });
+
+      const row = await m.createSubmission({ first_name, last_name, email, country, created_at });
       res.status(201).json(row);
   } catch (e) {
       console.error('create failed:', e);
-      res.status(500).json({ error: 'create failed'});
+      res.status(500).json({ error: 'create failed', details: e.message });
   }
-  console.log('POST /api/submissions body:', req.body);
 });
 
 

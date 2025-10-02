@@ -44,4 +44,3 @@ exports.remove = async (id) => {
     return result.affectedRows > 0;
 };
 
-

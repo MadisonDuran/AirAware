@@ -10,23 +10,20 @@ const clip = (s, n) => (s ?? '').toString().trim().slice(0, n);
 // CREATE
 router.post('/', async (req, res) => {
   try {
-      let { name, email, city, country_code, message } = req.body || {};
-      name = clip(name, 100);
+      let { first_name, last_name, email, country, create_at } = req.body || {};
+      first_name = clip(first_name, 100);
+      last_name = clip(last_name, 100);
       email = clip(email, 255);
-      city = clip(city,120);
-      country_code = (clip(country_code, 2) || '').toUpperCase() || null;
-      message = clip(message, 500) || null;
+      country = (clip(country, 2) || '').toUpperCase() || null;
+      create_at = create_at || new Date();
 
-
-
-
-      if (!name) return res.status(400).json({ error: 'name is required'});
+      if (!first_name) return res.status(400).json({ error: 'first_name is required'});
       if (!email || !isEmail(email)) return res.status(400).json({ error: 'valid email is required'});
+      if (!last_name) return res.status(400).json({ error: 'last_name is required'});
+      if (!country) return res.status(400).json({ error: 'country is required'});
+      if (!create_at) return res.status(400).json({ error: 'create_at is required'});
 
-
-
-
-      const row = await m.createSubmission({ name, email, city, country_code, message});
+      const row = await m.createSubmission({ first_name, last_name, email, country, create_at });
       res.status(201).json(row);
   } catch (e) {
       console.error('create failed:', e);

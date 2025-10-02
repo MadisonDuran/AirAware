@@ -10,7 +10,7 @@ exports.createSubmission = async ({ name, email, city, country_code, message }) 
     );
     const [rows] = await pool.query(
         `SELECT * FROM form_submissions WHERE id = ?`,
-        [result.insertId]
+        [result.insertId]   
     );
     return rows[0];
 };

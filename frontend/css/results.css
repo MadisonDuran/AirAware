@@ -67,10 +67,10 @@ body {
     border-radius: 50%;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     background: conic-gradient(
-        #0000ff 0% 60%,     /* Pollution */
-        #002966 60% 80%,   /* Pollen */
-        #377B2B 80% 90%,   /* AQI */
-        #7AC142 90% 100%   /* Other */
+        #0000ff 0% 10%,     /* Pollution */
+        #002966 10% 70%,   /* Pollen */
+        #377B2B 70% 20%,   /* AQI */
+        #7AC142 20% 100%   /* Other */
     );
 }
 .chart-label{   /* Percentage number center/ inner circle */

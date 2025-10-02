@@ -1,11 +1,18 @@
-/* Basic Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* Navbar */
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  color: #2c3e50;
+  background-image: linear-gradient(to right, #cce0ff, #0052cc, #002966);
+  line-height: 1.5;
+}
+
+/* NAV */
 nav {
   background-color: white;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
@@ -13,7 +20,7 @@ nav {
   top: 0;
   z-index: 100;
 }
-/* Navbar Items */
+
 nav ul {
   width: 100%;
   list-style: none;
@@ -21,11 +28,11 @@ nav ul {
   justify-content: flex-end;
   align-items: center;
 }
-/* Navbar Links */
+
 nav li {
   height: 3.5rem;
 }
-/* Navbar Link Styles */
+
 nav a {
   height: 100%;
   font-size: 1rem;
@@ -35,24 +42,20 @@ nav a {
   align-items: center;
   color: black;
 }
-/* Navbar Link Hover Effect */
+
 nav a:hover {
   background-color: #f0f0f0;
 }
-/* Align first nav item (logo) to the left */
+
 nav li:first-child {
   margin-right: auto;
 }
 
-/* Logo Styles */
 .logo {
-  height: 55px;
+  height: 50px;
   font-weight: bold;
   color: #27ae60;
-  mix-blend-mode: multiply;
 }
-
-/* Sidebar Styles */
 .sidebar {
   position: fixed;
   top: 0;
@@ -68,15 +71,14 @@ nav li:first-child {
   align-items: flex-start;
   justify-content: flex-start;
 }
-/* Sidebar Items */
+
 .sidebar li {
   width: 100%;
 }
-/* Sidebar Links */
 .sidebar a {
   width: 100%;
 }
-/* Sidebar Link Hover Effect */
+
 .menu-btn {
   display: none;
 }
@@ -88,9 +90,6 @@ nav li:first-child {
   margin-top: 40px;
   padding: 40px 20px 20px;
 }
-
-
-
 
 .footer-inner {
   max-width: 1100px;
@@ -151,4 +150,53 @@ nav li:first-child {
   padding-top: 12px;
   font-size: 13px;
   color: #9ca3af;
+}
+
+/* SIMPLE RESPONSIVE */
+@media (max-width: 900px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hideMobile {
+    display: none;
+  }
+  .sidebar {
+    width: 50%;
+  }
+  .menu-btn {
+    display: block;
+  }
+  .sidebar li {
+    padding: 4rem 0;
+  }
+  .sidebar a {
+    color: black;
+    font-size: 2rem;
+  }
+}
+/* Responsive */
+@media (max-width: 700px) {
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+}
+@media (max-width: 520px) {
+  .sidebar {
+    width: 100%;
+  }
+  .menu-btn {
+    display: block;
+  }
+  .sidebar li {
+    padding: 4rem 0;
+  }
+  .sidebar a {
+    color: black;
+    font-size: 2rem;
+  }
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
 }

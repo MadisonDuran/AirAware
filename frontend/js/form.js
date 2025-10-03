@@ -1,8 +1,10 @@
+// Show the sidebar from mobile view 
 function showSidebar() {
   const sidebar = document.querySelector(".sidebar");
   sidebar.style.display = "flex";
 }
 
+// Hide the sidebar from mobile view 
 function hideSidebar() {
   const sidebar = document.querySelector(".sidebar");
   sidebar.style.display = "none";

@@ -1,14 +1,16 @@
+// Show the sidebar from mobile view 
 function showSidebar() {
   const sidebar = document.querySelector(".sidebar");
   sidebar.style.display = "flex";
 }
 
+// Hide the sidebar from mobile view 
 function hideSidebar() {
   const sidebar = document.querySelector(".sidebar");
   sidebar.style.display = "none";
 }
 
-//Get form and elements
+// Get form and elements
 const form = document.getElementById("subscribeForm");
 const firstName = document.getElementById("firstName");
 const lastName = document.getElementById("lastName");
@@ -23,7 +25,7 @@ const lastNameError = document.getElementById("lastNameError");
 const emailError = document.getElementById("emailError");
 const countryError = document.getElementById("countryError");
 
-//Small helper to clear errors
+// Small helper to clear errors
 function showError(input, errorElement, message) {
   input.classList.add("error");
   errorElement.textContent = message;
@@ -43,11 +45,7 @@ function validateFirstName() {
   }
 
   if (value.length < 2) {
-    showError(
-      firstName,
-      firstNameError,
-      "First name must be at least 2 characters"
-    );
+    showError(firstName, firstNameError, "First name must be at least 2 characters");
     return false;
   }
 
@@ -56,7 +54,7 @@ function validateFirstName() {
 }
 
 function validateLastName() {
-  const value = lastName.value.trim(); // remove spaces
+  const value = lastName.value.trim();
 
   if (value === "") {
     showError(lastName, lastNameError, "Last name is required");
@@ -64,11 +62,7 @@ function validateLastName() {
   }
 
   if (value.length < 2) {
-    showError(
-      lastName,
-      lastNameError,
-      "Last name must be at least 2 characters"
-    );
+    showError(lastName, lastNameError, "Last name must be at least 2 characters");
     return false;
   }
 
@@ -76,7 +70,7 @@ function validateLastName() {
   return true;
 }
 
-//Email check with regex
+// Email check with regex
 function validateEmail() {
   const value = email.value.trim();
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -87,7 +81,6 @@ function validateEmail() {
   }
 
   if (!emailPattern.test(value)) {
-    // test is regex method to check the pattern
     showError(email, emailError, "Please enter a valid email address");
     return false;
   }
@@ -97,7 +90,7 @@ function validateEmail() {
 }
 
 function validateCountry() {
-  const value = country.value; // select the value inside input
+  const value = country.value;
 
   if (value === "") {
     showError(country, countryError, "Please select a country");
@@ -108,9 +101,9 @@ function validateCountry() {
   return true;
 }
 
-//Realtime validation
-firstName.addEventListener("input", validateFirstName); //user type runs functions
-firstName.addEventListener("blur", validateFirstName); // when user click input runs functions
+// Realtime validation
+firstName.addEventListener("input", validateFirstName);
+firstName.addEventListener("blur", validateFirstName);
 
 lastName.addEventListener("input", validateLastName);
 lastName.addEventListener("blur", validateLastName);
@@ -118,40 +111,59 @@ lastName.addEventListener("blur", validateLastName);
 email.addEventListener("input", validateEmail);
 email.addEventListener("blur", validateEmail);
 
-country.addEventListener("change", validateCountry); // runs when user change country in dropdown
+country.addEventListener("change", validateCountry);
 
-//  Form submit
-function handleSubmit(e) {
+// Form submit with real API call
+async function handleSubmit(e) {
   e.preventDefault();
 
-  // Validate everything
+  // Validate all fields
   const isFirstNameValid = validateFirstName();
   const isLastNameValid = validateLastName();
   const isEmailValid = validateEmail();
   const isCountryValid = validateCountry();
 
-  // Only continue if all are valid
   if (isFirstNameValid && isLastNameValid && isEmailValid && isCountryValid) {
     // Disable button and show loading text
     submitBtn.disabled = true;
     submitBtn.textContent = "Submitting...";
 
-    // Simulate a request
-    setTimeout(function () {
-      successMessage.classList.add("show");
+    try {
+      const response = await fetch("http://localhost:4000/api/subscription", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName: firstName.value.trim(),
+          lastName: lastName.value.trim(),
+          email: email.value.trim(),
+          country: country.value,
+        }),
+      });
 
-      // Reset the form
-      form.reset();
+      if (response.ok) {
+        successMessage.classList.add("show");
 
-      // Re-enable the button and restore text
+        // Reset the form
+        form.reset();
+
+        // Hide success after 4s
+        setTimeout(() => {
+          successMessage.classList.remove("show");
+        }, 4000);
+      } else {
+        const errorData = await response.json();
+        alert("Error: " + (errorData.error || "Something went wrong"));
+      }
+    } catch (err) {
+      console.error("Request failed:", err);
+      alert("Failed to connect to the server. Please try again later.");
+    } finally {
+      // Re-enable the button
       submitBtn.disabled = false;
       submitBtn.textContent = "Subscribe";
-
-      // Hide success after 3 seconds
-      setTimeout(function () {
-        successMessage.classList.remove("show");
-      }, 4000);
-    }, 2000);
+    }
   }
 }
 

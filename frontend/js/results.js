@@ -1,17 +1,39 @@
+// Show the sidebar from mobile view 
 function showSidebar() {
   const sidebar = document.querySelector(".sidebar");
   sidebar.style.display = "flex";
 }
 
+// Hide the sidebar from mobile view 
 function hideSidebar() {
   const sidebar = document.querySelector(".sidebar");
   sidebar.style.display = "none";
 }
 
+// Get the form from the search bar input
+const form = document.getElementById('searchForm')
+const searchBtn = document.getElementById('search-btn')
+
+// Click on the Search button 
+function clickSearch(){
+
+}
+
+
+// Display the AQI container 
+function showAQI(){
+
+}
+
+// Display the City Weather Lookup container 
+function showLookup(){
+
+}
+
 // Loading page for pie-chart
 document.addEventListener("DOMContentLoaded", showPieChart)
 
-// Results page for pie-chart
+// Display the Pie Chart container 
 function showPieChart(){
     console.log("pie-chart on load")
 

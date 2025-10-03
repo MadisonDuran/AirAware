@@ -120,40 +120,5 @@ email.addEventListener("blur", validateEmail);
 
 country.addEventListener("change", validateCountry); // runs when user change country in dropdown
 
-//  Form submit
-function handleSubmit(e) {
-  e.preventDefault();
 
-  // Validate everything
-  const isFirstNameValid = validateFirstName();
-  const isLastNameValid = validateLastName();
-  const isEmailValid = validateEmail();
-  const isCountryValid = validateCountry();
-
-  // Only continue if all are valid
-  if (isFirstNameValid && isLastNameValid && isEmailValid && isCountryValid) {
-    // Disable button and show loading text
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Submitting...";
-
-    // Simulate a request
-    setTimeout(function () {
-      successMessage.classList.add("show");
-
-      // Reset the form
-      form.reset();
-
-      // Re-enable the button and restore text
-      submitBtn.disabled = false;
-      submitBtn.textContent = "Subscribe";
-
-      // Hide success after 3 seconds
-      setTimeout(function () {
-        successMessage.classList.remove("show");
-      }, 4000);
-    }, 2000);
-  }
-}
-
-form.addEventListener("submit", handleSubmit);
 

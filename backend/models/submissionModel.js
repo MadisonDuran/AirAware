@@ -3,16 +3,16 @@
 const pool = require('../config/db');
 
 // CREATE
-exports.createSubmission = async ({ first_name, last_name, email, country, create_at }) => {
+exports.createSubmission = async ({ first_name, last_name, email, country, created_at }) => {
     const [result] = await pool.query(
-        `INSERT INTO Newsletter (first_name, last_name, email, country, create_at) VALUES (?, ?, ?, ?, ?)`,
-        [first_name, last_name, email, country, create_at]
+        `INSERT INTO Newsletter (first_name, last_name, email, country, created_at) VALUES (?, ?, ?, ?, ?)`,
+        [first_name, last_name, email, country, created_at]
     );
     const [rows] = await pool.query(
         `SELECT * FROM Newsletter WHERE id = ?`,
         [result.insertId]
     );
-    return rows;
+    return rows[0];
 };
 
 // READ (all)

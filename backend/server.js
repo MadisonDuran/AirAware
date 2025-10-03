@@ -4,7 +4,7 @@ const axios = require('axios');
 const cors = require('cors');
 const supabase = require('./supabaseClient');
 require('dotenv').config();
-const PORT = 4000;
+const PORT = 5000;
 
 
 const app = express();
@@ -49,14 +49,17 @@ const countriesRoute = require('./routes/countries');
 const manufacturersRoute = require('./routes/manufacturers');
 const instrumentsRoute = require('./routes/instruments');
 // const submissionsRoute = require('./routes/submissions');
+const search = require('./routes/search');
 
 
 app.use('/api/countries', countriesRoute);
 app.use('/api/manufacturers', manufacturersRoute);
 app.use('/api/instruments', instrumentsRoute);
 // app.use('/api/submissions', submissionsRoute);
+app.use('/api/search', search);
 
-console.log("Routes loaded: /api/test, /api/countries, /api/manufacturers, /api/instruments, /api/submissions");
+
+console.log("Routes loaded: /api/test, /api/countries, /api/manufacturers, /api/instruments, /api/submissions, /api/search/{city}");
 
 // Subscription Form  1rst API Route
 app.post("/api/subscription", async (req, res) => {

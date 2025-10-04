@@ -28,7 +28,7 @@ Live Demo: [insert render link]
 ---
 ## Setup & Installation
 Clone this repository:
-- git clone: git@github.com:MadisonDuran/AirAware.git
+- git clone: "git@github.com:MadisonDuran/AirAware.git"
 - cd AirAware
 
 Install dependencies:

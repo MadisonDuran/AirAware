@@ -15,7 +15,7 @@ AirAware is a full-stack web application designed to promote environmental aware
 
 ## ✨ Features
 
-- 🔍 **Search air quality** by ccountry
+- 🔍 **Search air quality** by country
 - 🌐 **Global pollution data** using OpenAQ
 - 🌤️ **Weather integration** via Weatherbit
 - 📬 **User submission form** (stored in Supabase)

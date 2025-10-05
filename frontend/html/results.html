@@ -53,7 +53,8 @@
             <h1 id="header__title">Air Quality Data</h1>
             <form id="searchForm">
                 <input type="search" id="search-bar" placeholder="Enter location..." />
-                <button id="search-btn">Search</button>
+                <button type="submit" id="search-btn">Search</button>
+                <p id="search-error" class="error-message"></p>
             </form>
         </section>
 
@@ -62,21 +63,16 @@
         <!-- Air Quality Index Section -->
         <section id="top-data__section">
             <div class="info-data__container">
-                <h2>Air Quality Index (AQI)</h2>
-                <p><strong>Status:</strong> High</p>
-                <p><strong>Tree pollen:</strong> 150 (High)</p>
-                <p><strong>Grass pollen:</strong> 80 (Moderate)</p>
+                <img src="/frontend/img/aqi.jpg" alt="AQI cloud clipart image" class="clipart-Icon">
+                <div class="content-placeholder" id="top-content" style="display:none"></div>
             </div>
         </section>
 
         <!-- Countries Section -->
         <section id="bottom-data__section">
             <div class="info-data__container">
-                <h2>City Weather Lookup</h2>
-                <p><strong>Temperature: </strong>25.6 C</p>
-                <p><strong>Condition: </strong>Few clouds</p>
-                <p><strong>Humidity: </strong> 49%</p>
-                <p><strong>Wind Speed: </strong> 4 m/s</p>
+                <img src="/frontend/img/weather.jpg" alt="Weather clipart image" class="clipart-Icon">
+                <div class="content-placeholder" id="bottom-content" style="display:none"></div>
             </div>
         </section>
 
@@ -84,30 +80,8 @@
         <section id="pie-results__section">
             <!-- Startpoint of the Chart --> 
             <div class="info-data__container">
-                <h2 id="location">Charlotte</h2>
-                <h3 id="region">North Carolina</h3>
-            
-            <!-- Pie Chart -->
-            <figure id ="pie-data__container"
-                    data-pollution="60"
-                    data-pollen="30"
-                    data-aqi="10"
-                    data-other="5">
-                <div class="chart-data__container">
-                    <div class="chart-label" id="chart-label">100%</div>
-                </div>
-            </figure>
-            <!-- The data/labels items -->
-            <figcaption class="portions-data__container">
-                <div class="portion-item"><div class="portion-color"></div>60% Pollution</div>
-                <div class="portion-item"><div class="portion-color"></div>30% Pollen</div>
-                <div class="portion-item"><div class="portion-color"></div>10% AQI</div>
-                <div class="portion-item"><div class="portion-color"></div>5% Other</div>
-            </figcaption>
-            <!-- Endpoint of the Chart -->    
-            
-                <h3 id="status">Good</h3>
-                <p id="message">You can breathe easily in this area</p>
+                <img src="/frontend/img/bluePie.png" alt="Blue pie chart clipart image" id="clipart-pie">
+                <div class="content-placeholder" id="pie-content" style="display:none"></div>
             </div>
          </section>
         </div>

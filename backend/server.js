@@ -4,11 +4,17 @@ const axios = require('axios');
 const cors = require('cors');
 const supabase = require('./supabaseClient');
 require('dotenv').config();
-const PORT = 5000;
+const PORT = 4000;
+
+const path = require('path');
+const publicDir = path.join(__dirname, '..', 'frontend');
 
 
 const app = express();
-
+app.use(express.static(publicDir));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(publicDir, 'index.html'));
+});
 // // PostgreSQL connection setup
 // const pool = new Pool({
 //   connectionString: process.env.POSTGRES_URL + "?sslmode=require",

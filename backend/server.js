@@ -10,6 +10,11 @@ const path = require('path');
 
 const app = express();
 
+const FRONTEND_DIR = path.join(__dirname, '..', 'frontend');
+app.use('/css', express.static(path.join(FRONTEND_DIR, 'css')));
+app.use('/js', express.static(path.join(FRONTEND_DIR, 'js')));
+app.use('/img', express.static(path.join(FRONTEND_DIR, 'img')));
+
 app.get('/', (req, res) => {
   const indexPath = path.join(__dirname, '..', 'index.html');
   res.sendFile(indexPath);

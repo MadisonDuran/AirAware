@@ -7,21 +7,14 @@ require('dotenv').config();
 const PORT = 4000;
 
 const path = require('path');
-const publicDir = path.join(__dirname, '..', 'frontend');
-
 
 const app = express();
-app.use(express.static(publicDir));
+
 app.get('/', (req, res) => {
-  res.sendFile(path.join(publicDir, 'index.html'));
+  const indexPath = path.join(__dirname, '..', 'index.html');
+  res.sendFile(indexPath);
 });
-// // PostgreSQL connection setup
-// const pool = new Pool({
-//   connectionString: process.env.POSTGRES_URL + "?sslmode=require",
-//   ssl: {
-//     rejectUnauthorized: false
-//   }
-// });
+
 
 app.use(express.json());
 // Allow both Live Server origins

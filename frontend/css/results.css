@@ -49,7 +49,19 @@ body {
     justify-content: space-between;
     padding-top: 1em;
 }
-
+/* Graphic Images Icons (top/bottom/pie) */ 
+.clipart-Icon, #clipart-pie {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;          
+    height: 20em;        
+    margin: 0 auto;      
+}
+#clipart-pie img {
+    width: 80%;           
+    height: auto;         
+}
 /* Pie Chart Styles */
 #pie-data__container{   /* Pie chart and portion labels container (next to each other) */
     display: flex;
@@ -133,6 +145,14 @@ body {
     #search-bar, #search-btn, #message{
         font-size: 20px;
     }
+    .clipart-Icon, #clipart-pie {
+        width: 90%;          
+        height: 25em;              
+    }
+    #clipart-pie img {
+        width: 80%;           
+        height: auto;         
+    }
 }
 
 /* Laptop Responsive Styles */
@@ -166,5 +186,16 @@ body {
     }
     #status{
         font-size: 24px;
+    }
+    .clipart-Icon{
+        width: auto;          
+        height: 18em;
+        max-height: auto;             
+    }
+    #clipart-pie {
+        width: auto;
+        height: 45em;
+        max-width: 400px;
+        
     }
 }

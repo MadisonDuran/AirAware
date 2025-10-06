@@ -48,15 +48,18 @@ res.json({ message: "API is working" });
 const countriesRoute = require('./routes/countries');
 const manufacturersRoute = require('./routes/manufacturers');
 const instrumentsRoute = require('./routes/instruments');
-const submissionsRoute = require('./routes/submissions');
+// const submissionsRoute = require('./routes/submissions');
+const search = require('./routes/search');
 
 
 app.use('/api/countries', countriesRoute);
 app.use('/api/manufacturers', manufacturersRoute);
 app.use('/api/instruments', instrumentsRoute);
-app.use('/api/submissions', submissionsRoute);
+// app.use('/api/submissions', submissionsRoute);
+app.use('/api/search', search);
 
-console.log("Routes loaded: /api/test, /api/countries, /api/manufacturers, /api/instruments, /api/submissions");
+
+console.log("Routes loaded: /api/test, /api/countries, /api/manufacturers, /api/instruments, /api/submissions, /api/search/{city}");
 
 // Subscription Form  1rst API Route
 app.post("/api/subscription", async (req, res) => {

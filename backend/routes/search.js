@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getCityWeather } = require('../controllers/weatherController');
+const { getCityWeather } = require('../controllers/resultController');
 
 // GET /api/search/:city
 router.get('/:city', getCityWeather);

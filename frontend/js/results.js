@@ -1,167 +1,200 @@
-// Show the sidebar from mobile view 
-function showSidebar() {
-  const sidebar = document.querySelector(".sidebar");
-  sidebar.style.display = "flex";
-}
+document.addEventListener('DOMContentLoaded', () => {
+  // Mobile Sidebar controls
+  const showSidebar = () => document.querySelector(".sidebar").style.display = "flex";
+  const hideSidebar = () => document.querySelector(".sidebar").style.display = "none";
+  window.showSidebar = showSidebar;
+  window.hideSidebar = hideSidebar;
 
-// Hide the sidebar from mobile view 
-function hideSidebar() {
-  const sidebar = document.querySelector(".sidebar");
-  sidebar.style.display = "none";
-}
+  // Elements
+  const routesSelect = document.getElementById('routes');
+  const countriesSelect = document.getElementById('countries');
+  const searchForm = document.getElementById('searchForm');
+  const searchInput = document.getElementById('search-bar');
+  const searchError = document.getElementById('search-error');
 
-// Get elements from the Search Form
-const searchForm = document.getElementById('searchForm');
-const searchInput = document.getElementById('search-bar');
-const searchError = document.getElementById('search-error');
+  const topContent = document.getElementById('top-content');
+  const bottomContent = document.getElementById('bottom-content');
+  const pieContent = document.getElementById('pie-content');
 
-// Get elements from the Display Content
-const topContent = document.getElementById('top-content');
-const bottomContent = document.getElementById('bottom-content');
-const pieContent = document.getElementById('pie-content');
+  const topImage = document.querySelector('#top-data__section .clipart-Icon');
+  const bottomImage = document.querySelector('#bottom-data__section .clipart-Icon');
+  const pieImage = document.getElementById('clipart-pie');
 
-// Clear out previous results and errors
-function clearResults() {
-    topContent.innerHTML = '';
-    bottomContent.innerHTML = '';
-    pieContent.innerHTML = '';
-    searchError.textContent = '';
-    searchInput.classList.remove('error');
-}
+  let dynamicSelect = null;
 
-// Handle form submit
-searchForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    clearResults();
+  // ---------- Helpers ----------
+  const showImage = (img) => img && (img.style.display = '');
+  const hideImage = (img) => img && (img.style.display = 'none');
 
-    const location = searchInput.value.trim();
-    if (!location) {
-        searchInput.classList.add('error');
-        searchError.textContent = 'Require location';
-        return;
+  const clearSection = (section) => {
+    section.innerHTML = '';
+    section.style.display = 'none';
+  };
+
+  const showSection = (section) => section.style.display = '';
+
+  const fetchJson = async (url) => {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Failed to fetch: ${url}`);
+    return res.json();
+  };
+
+  // ---------- Dynamic Select Setup ----------
+  const ensureDynamicSelect = () => {
+    if (dynamicSelect) return dynamicSelect;
+
+    dynamicSelect = document.createElement('select');
+    dynamicSelect.id = 'dynamic-select';
+    dynamicSelect.innerHTML = '<option value="">-- choose an option --</option>';
+    routesSelect.insertAdjacentElement('afterend', dynamicSelect);
+
+    return dynamicSelect;
+  };
+
+  // Populate a select with fetched options
+  const populateSelect = (select, items, getLabel, getValue) => {
+    select.innerHTML = '<option value="">-- choose an option --</option>';
+    items.forEach(item => {
+      const opt = document.createElement('option');
+      opt.value = getValue(item);
+      opt.textContent = getLabel(item);
+      select.appendChild(opt);
+    });
+  };
+
+  // ---------- Event Handlers ----------
+
+  // Handle route changes
+  routesSelect.addEventListener('change', async (e) => {
+    const route = e.target.value;
+
+    if (route === 'countries') {
+      if (dynamicSelect) dynamicSelect.style.display = 'none';
+      countriesSelect.style.display = '';
+      return;
     }
 
-    fetch('/search?location=' + encodeURIComponent(location))
-        .then((response) => {
-            if (!response.ok) throw new Error('Network is not responding');
-            return response.json();
-        })
-        .then((data) => {
-            // --- TOP SECTION ---
-            if (topImage) topImage.style.display = 'none';
-            topContent.style.display = '';
-            topContent.innerHTML = '';
+    countriesSelect.style.display = 'none';
+    const ds = ensureDynamicSelect();
+    ds.style.display = '';
+    ds.disabled = true;
+    ds.innerHTML = '<option>Loading...</option>';
 
-            const h2Top = document.createElement('h2');
-            h2Top.textContent = 'Air Quality Index (AQI)';
+    try {
+      const data = await fetchJson(`/api/${route}`);
+      const items = data.results || data;
+      if (route === 'instruments') {
+        populateSelect(ds, items, i => i.name || i.model, i => i.id);
+      } else if (route === 'manufacturers') {
+        populateSelect(ds, items, i => i.name, i => i.id);
+      }
+      ds.disabled = false;
+    } catch (err) {
+      console.error(err);
+      ds.innerHTML = '<option>Failed to load</option>';
+    }
 
-            const pStatus = document.createElement('p');
-            pStatus.innerHTML = `<strong>Status:</strong> ${data.status}`;
+    ds.addEventListener('change', () => {
+      const opt = ds.selectedOptions[0];
+      if (!opt || !opt.value) return;
 
-            const pTree = document.createElement('p');
-            pTree.innerHTML = `<strong>Tree pollen:</strong> ${data.treePollen}`;
+      clearSection(topContent);
+      hideImage(topImage);
+      showSection(topContent);
 
-            const pGrass = document.createElement('p');
-            pGrass.innerHTML = `<strong>Grass pollen:</strong> ${data.grassPollen}`;
-            
-            topContent.append(h2Top, pStatus, pTree, pGrass);
+      topContent.innerHTML = `
+        <h2>${opt.textContent}</h2>
+        <p><small>ID: ${opt.value}</small></p>
+      `;
+    });
+  });
 
-            // --- BOTTOM SECTION ---
-            if (bottomImage) bottomImage.style.display = 'none';
-            bottomContent.style.display = '';
-            bottomContent.innerHTML = '';
+  // Handle country selection → Pie section
+  countriesSelect.addEventListener('change', (e) => {
+    const country = e.target.value;
+    if (!country) return;
 
-            const h2Bottom = document.createElement('h2');
-            h2Bottom.textContent = 'City Weather Lookup';
+    clearSection(pieContent);
+    hideImage(pieImage);
+    showSection(pieContent);
 
-            const pTemp = document.createElement('p');
-            pTemp.innerHTML = `<strong>Temperature:</strong> ${data.temperature}`;
+    // Static example data
+    const pieValues = { No:{$units}, No2:{$units}, Pm10:{$units}, Pm25:{$units} };
+    const total = Object.values(pieValues).reduce((a, b) => a + b, 0);
 
-            const pCond = document.createElement('p');
-            pCond.innerHTML = `<strong>Condition:</strong> ${data.condition}`;
+    const NoPercent = (pieValues.No / total) * 100;
+    const No2Percent = (pieValues.No2 / total) * 100;
+    const Pm10Percent = (pieValues.Pm10 / total) * 100;
+    const Pm25Percent = (pieValues.Pm25 / total) * 100;
 
-            const pHum = document.createElement('p');
-            pHum.innerHTML = `<strong>Humidity:</strong> ${data.humidity}`;
+    pieContent.innerHTML = `
+      <h2>${country}</h2>
+      <figure id="pie-data__container">
+        <div class="chart-data__container"></div>
+      </figure>
+      <figcaption class="portions-data__container">
+        <div>No: ${pieValues.No}%</div>
+        <div>No2: ${pieValues.No2}%</div>
+        <div>Pm10: ${pieValues.Pm10}%</div>
+        <div>Pm25: ${pieValues.Pm25}%</div>
+      </figcaption>
+    `;
 
-            const pWind = document.createElement('p');
-            pWind.innerHTML = `<strong>Wind Speed:</strong> ${data.windSpeed}`;
+    const chart = pieContent.querySelector('.chart-data__container');
+    chart.style.background = `conic-gradient(
+      #0000ff ${NoPercent}%,
+      #002966 ${NoPercent}% ${NoPercent + No2Percent}%,
+      #377B2B ${NoPercent + No2Percent}% ${NoPercent + No2Percent + Pm10Percent}%,
+      #7AC142 ${NoPercent + No2Percent + Pm10Percent + Pm25Percent }% 
+    )`;
+  });
 
-            bottomContent.append(h2Bottom, pTemp, pCond, pHum, pWind);
+  // Handle search form → Weather section
+  searchForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    searchError.textContent = '';
+    const location = searchInput.value.trim();
 
-            // --- PIE SECTION ---
-            if (pieImage) pieImage.style.display = 'none';
-            pieContent.style.display = '';
-            pieContent.innerHTML = '';
+    if (!location) {
+      searchError.textContent = 'Please enter a location';
+      return;
+    }
 
-            const h2Pie = document.createElement('h2');
-            h2Pie.textContent = data.location_name || location;
+    try {
+      const WeatherData = await fetchJson(`/api/search/${encodeURIComponent(location)}`);
+      const description = WeatherData.weather.description;
+      const country = WeatherData.country_code;
+      const datetime = WeatherData.ob_time;
+      const humidity = WeatherData.rh;
+      const wind = WeatherData.wind_spd;
+      const temperature = WeatherData.temp;
 
-            const h3Region = document.createElement('h3');
-            h3Region.textContent = data.region || '';
+      clearSection(bottomContent);
+      hideImage(bottomImage);
+      showSection(bottomContent);
 
-            const pStatusMsg = document.createElement('p');
-            pStatusMsg.id = 'message';
+      bottomContent.innerHTML = `
+        <h2>Weather in ${location}, ${country} </h2>
+        <p><strong>Temperature:</strong> ${temperature}</p>
+        <p><strong>Description:</strong> ${description}</p>
+        <p><strong>Humidity:</strong> ${humidity}</p>
+        <p><strong>Wind Speed:</strong> ${wind}</p>
+        <p><strong>Time:</strong> ${datetime}</p>
+      `;
+    } catch (err) {
+      console.error(err);
+      searchError.textContent = 'Failed to fetch weather data';
+    }
+  });
 
-            pStatusMsg.textContent = data.message || data.summary || '';
-
-            pieContent.append(h2Pie, h3Region, pStatusMsg);
-
-            if (data.pie) {
-                const fig = document.createElement('figure');
-                fig.id = 'pie-data__container';
-                fig.dataset.pollution = data.pie.pollution ?? 0;
-                fig.dataset.pollen = data.pie.pollen ?? 0;
-                fig.dataset.aqi = data.pie.aqi ?? 0;
-                fig.dataset.others = data.pie.others ?? 0;
-
-                const chartDiv = document.createElement('div');
-                chartDiv.className = 'chart-data__container';
-
-                const labelDiv = document.createElement('div');
-                labelDiv.className = 'chart-label';
-                
-                labelDiv.textContent = '100%';
-                chartDiv.appendChild(labelDiv);
-                fig.appendChild(chartDiv);
-                pieContent.appendChild(fig);
-
-                const portions = [
-                    { label: 'Pollution', value: data.pie.pollution },
-                    { label: 'Pollen', value: data.pie.pollen },
-                    { label: 'AQI', value: data.pie.aqi },
-                    { label: 'Other', value: data.pie.others },
-                ];
-                const total = portions.reduce((sum, p) => sum + p.value, 0) || 1;
-                const figcap = document.createElement('figcaption');
-                figcap.className = 'portions-data__container';
-                portions.forEach((p) => {
-                    const percent = Math.round((p.value / total) * 100);
-                    const item = document.createElement('div');
-                    item.className = 'portion-item';
-                    item.innerHTML = `<div class="portion-color"></div>${percent}% ${p.label}`;
-                    figcap.appendChild(item);
-                });
-                pieContent.appendChild(figcap);
-
-                // Render the conic-gradient
-                const pollutionPercent = (data.pie.pollution / total) * 100;
-                const pollenPercent = (data.pie.pollen / total) * 100;
-                const aqiPercent = (data.pie.aqi / total) * 100;
-                const chart = fig.querySelector('.chart-data__container');
-                chart.style.background = `conic-gradient(
-                    #0000ff 0% ${pollutionPercent}%,
-                    #002966 ${pollutionPercent}% ${pollutionPercent + pollenPercent}%,
-                    #377B2B ${pollutionPercent + pollenPercent}% ${pollutionPercent + pollenPercent + aqiPercent}%,
-                    #7AC142 ${pollutionPercent + pollenPercent + aqiPercent}% 100%
-                )`;
-            }
-        })
-        .catch((error) => {
-            console.log('Fetch failed:', error);
-            searchError.textContent = 'Failed to fetch results. Please try again.';
-        });
+  // ---------- Initial State ----------
+  clearSection(topContent);
+  clearSection(bottomContent);
+  clearSection(pieContent);
+  showImage(topImage);
+  showImage(bottomImage);
+  showImage(pieImage);
 });
-
 
 
 // searchForm.addEventListener('submit', (e) => {              // User click on button 

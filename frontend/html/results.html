@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta name="description" charset="UTF-8" content="Search page layout for AirAware">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/shared.css">
     <link rel="stylesheet" href="../css/results.css">
-    <link rel="icon" type="image/png" href="../img/AirAware_icon.png">
+    <link rel="icon" type="image/png" href="/frontend/img/AirAware.png">
     <title>Air Quality Data</title>
 </head>
 <body>
@@ -16,7 +16,7 @@
         <nav>
         <ul class="sidebar">
             <li onclick="hideSidebar()">
-                <a><img src="/frontend/html/images/close_sidebar.png" alt="close sidebar icon"/></a>
+                <img src="/frontend/html/images/close_sidebar.png" alt="close sidebar icon"/>
             </li>
             <li><a href="/index.html">Home</a></li>
             <li><a href="/frontend/html/results.html">Air Quality Data</a></li>
@@ -52,6 +52,7 @@
         <section id="search-section">
             <h1 id="header__title">Air Quality Data</h1>
             <form id="searchForm">
+
                 <input type="search" id="search-bar" placeholder="Enter location..." />
                 <button type="submit" id="search-btn">Search</button>
                 <p id="search-error" class="error-message"></p>
@@ -73,6 +74,7 @@
             <div class="info-data__container">
                 <img src="/frontend/img/weather.jpg" alt="Weather clipart image" class="clipart-Icon">
                 <div class="content-placeholder" id="bottom-content" style="display:none"></div>
+                <p>The cities you choose will display basic regional details such as temperature, weather conditions, humidity, wind speed, and time zone.</p>
             </div>
         </section>
 
@@ -82,6 +84,8 @@
             <div class="info-data__container">
                 <img src="/frontend/img/bluePie.png" alt="Blue pie chart clipart image" id="clipart-pie">
                 <div class="content-placeholder" id="pie-content" style="display:none"></div>
+                <p>PM2.5 air quality refers to the amount of fine particulate matter (PM), which consists of microscopic particles less than 2.5 micrometers in diameter, in the air. 
+                    These tiny, inhalable particles, including smoke, dust, and aerosols, are the most dangerous type of PM because they can penetrate deep into the lungs and may even enter the bloodstream. </p>
             </div>
          </section>
         </div>
@@ -103,7 +107,7 @@
                 <ul>
                     <li><a href="/index.html">Home</a></li>
                     <li><a href="/frontend/html/results.html">Air Quality Data</a></li>
-                    <li><a href="/frontend/html/about.html">About</a></li>
+                    <li><a href="/frontend/html/about.html">About Us</a></li>
                     <li><a href="/frontend/html/contact.html">Contact</a></li>
                 </ul>
             </div>

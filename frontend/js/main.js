@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
       };
       
       // Send data to backend
-      fetch('http://localhost:5000/api/submissions', {
+      fetch('https://airaware-odf6.onrender.com/api/submissions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)

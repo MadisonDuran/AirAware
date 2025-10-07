@@ -129,7 +129,7 @@ async function handleSubmit(e) {
     submitBtn.textContent = "Submitting...";
 
     try {
-      const response = await fetch("https://airaware-odf6.onrender.com/api/subscription", {
+      const response = await fetch("/api/subscription", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

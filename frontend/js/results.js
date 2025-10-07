@@ -1,184 +1,191 @@
-// // Show the sidebar from mobile view 
-// function showSidebar() {
-//   const sidebar = document.querySelector(".sidebar");
-//   sidebar.style.display = "flex";
-// }
+// Clean results.js - single-file implementation
+// Maps: countries -> pie, search -> weather (bottom), instruments/manufacturers -> top
 
-// // Hide the sidebar from mobile view 
-// function hideSidebar() {
-//   const sidebar = document.querySelector(".sidebar");
-//   sidebar.style.display = "none";
-// }
+function showSidebar() { const s = document.querySelector('.sidebar'); if (s) s.style.display = 'flex'; }
+function hideSidebar() { const s = document.querySelector('.sidebar'); if (s) s.style.display = 'none'; }
 
-// // // Get the form from the search bar input
-// // const form = document.getElementById('searchForm')
-// // const searchBtn = document.getElementById('search-btn')
+document.addEventListener('DOMContentLoaded', () => {
+  const routesSelect = document.getElementById('routes');
+  const countriesSelect = document.getElementById('countries');
+  const searchForm = document.getElementById('searchForm');
+  const searchInput = document.getElementById('search-bar');
+  const searchError = document.getElementById('search-error');
+  const filterDetails = document.getElementById('filter-details');
 
-// // // Click on the Search button 
-// // function clickSearch(){
+  const topContent = document.getElementById('top-content');
+  const bottomContent = document.getElementById('bottom-content');
+  const pieContent = document.getElementById('pie-content');
+  const topImage = document.querySelector('#top-data__section .clipart-Icon');
+  const bottomImage = document.querySelector('#bottom-data__section .clipart-Icon');
+  const pieImage = document.getElementById('clipart-pie');
 
-// // }
+  let dynamicSelect = null;
 
+  function clearSection(el) { if (!el) return; el.innerHTML = ''; el.style.display = 'none'; }
+  function showSection(el) { if (el) el.style.display = ''; }
+  function showImage(img) { if (img) img.style.display = ''; }
+  function hideImage(img) { if (img) img.style.display = 'none'; }
 
-// // // Display the AQI container 
-// // function showAQI(){
-
-// // }
-
-// // // Display the City Weather Lookup container 
-// // function showLookup(){
-
-// // }
-
-// // // Loading page for pie-chart
-// // document.addEventListener("DOMContentLoaded", showPieChart)
-
-// // // Display the Pie Chart container 
-// // function showPieChart(){
-// //     console.log("pie-chart on load")
-
-
-//     // Grab the element from the pie chart 
-//     const pie = document.getElementById("pie-data__container");
-        
-//     // Grab values from data attrbuite (return an integer to access data)
-//     const pollution = parseInt(pie.dataset.pollution);
-//     const pollen = parseInt(pie.dataset.pollen);
-//     const aqi = parseInt(pie.dataset.aqi);
-//     const others = parseInt(pie.dataset.others);
-
-//     // Calculate the angles
-//     const total = pollution + pollen + aqi + others;
-//     let pollutionPercent = (pollution/total) * 100;
-//     let pollenPercent = (pollen/total) * 100;
-//     let aqiPercent = (aqi/total) * 100;
-//     let othersPercent = (others/total) * 100;
-
-//     // Colors changes based by percenatges 
-//     const chart = pie.querySelector(".chart-data__container");
-//     chart.style.background = `conic-gradient(
-//     #0000ff 0% ${pollutionPercent}%,
-//     #002966 ${pollutionPercent}% ${pollutionPercent + pollenPercent}%,
-//     #377B2B ${pollutionPercent + pollenPercent}% ${pollutionPercent + pollenPercent + aqiPercent}%,
-//     #7AC142 ${pollutionPercent + pollenPercent + aqiPercent}% 100%
-//     )`;
-
-// }
-
-// Show the sidebar from mobile view 
-function showSidebar() {
-  const sidebar = document.querySelector(".sidebar");
-  sidebar.style.display = "flex";
-}
-
-// Hide the sidebar from mobile view 
-function hideSidebar() {
-  const sidebar = document.querySelector(".sidebar");
-  sidebar.style.display = "none";
-}
-
-// 1. Main form submit listener (search logic)
-document.getElementById('searchForm').addEventListener('submit', async function (e) {
-  e.preventDefault();
-
-  const city = document.getElementById('search-bar').value.trim();
-  if (!city) return alert('Please enter a city');
-
-  try {
-    const response = await fetch(`http://localhost:5000/api/search/${encodeURIComponent(city)}`);
-    if (!response.ok) throw new Error('City not found');
-
-    const data = await response.json();
-
-    updateWeatherSection(data.weather);
-    updateAQISection(data.aqi);
-    updatePieChart(data.chart, data.location, data.aqi.status, data.message);
-
-    // Optional: hide cover image if needed
-    // hideCoverImage();
-
-  } catch (err) {
-    console.error(err);
-    alert('Failed to fetch city data. Please try again.');
+  function ensureDynamicSelect() {
+    if (dynamicSelect) return dynamicSelect;
+    dynamicSelect = document.createElement('select');
+    dynamicSelect.id = 'dynamic-select';
+    dynamicSelect.innerHTML = '<option value="">-- choose an option --</option>';
+    if (routesSelect && routesSelect.parentNode) routesSelect.parentNode.insertBefore(dynamicSelect, routesSelect.nextSibling);
+    dynamicSelect.addEventListener('change', () => {
+      const opt = dynamicSelect.selectedOptions[0];
+      if (!opt || !opt.value) return;
+      if (filterDetails) filterDetails.innerHTML = `<strong>Selected:</strong> ${opt.textContent}` + (opt.dataset.id ? ` <small>(id: ${opt.dataset.id})</small>` : '');
+    });
+    return dynamicSelect;
   }
+
+  function populateSelect(selectEl, items, labelFn, valueFn, dataAttrsFn) {
+    selectEl.innerHTML = '<option value="">-- choose an option --</option>';
+    items.forEach(it => {
+      const opt = document.createElement('option');
+      opt.value = valueFn(it);
+      opt.textContent = labelFn(it);
+      const attrs = dataAttrsFn ? dataAttrsFn(it) : {};
+      Object.keys(attrs).forEach(k => { opt.dataset[k] = attrs[k]; });
+      selectEl.appendChild(opt);
+    });
+  }
+
+  async function fetchJson(path) {
+    const res = await fetch(path);
+    if (!res.ok) throw new Error('Network response not ok: ' + res.status);
+    return res.json();
+  }
+
+  // Countries -> pie
+  if (countriesSelect) {
+    countriesSelect.addEventListener('change', (e) => {
+      const val = e.target.value;
+      if (!val) return;
+      searchInput.value = val;
+      clearSection(pieContent);
+      hideImage(pieImage);
+      showSection(pieContent);
+
+      const locationName = val;
+      const region = e.target.selectedOptions[0]?.textContent || '';
+      const pieValues = { pollution: 60, pollen: 30, aqi: 10, other: 5 };
+
+      pieContent.innerHTML = `
+        <h2 id="location">${locationName}</h2>
+        <h3 id="region">${region}</h3>
+        <figure id="pie-data__container" data-pollution="${pieValues.pollution}" data-pollen="${pieValues.pollen}" data-aqi="${pieValues.aqi}" data-other="${pieValues.other}">
+          <div class="chart-data__container"><div class="chart-label">100%</div></div>
+        </figure>
+        <figcaption class="portions-data__container"></figcaption>
+        <h3 id="status">Good</h3>
+        <p id="message">You can breathe easily in this area</p>
+      `;
+
+      const fig = pieContent.querySelector('#pie-data__container');
+      const figcap = pieContent.querySelector('.portions-data__container');
+      if (fig && figcap) {
+        const portions = [
+          { label: 'Pollution', value: +fig.dataset.pollution || 0 },
+          { label: 'Pollen', value: +fig.dataset.pollen || 0 },
+          { label: 'AQI', value: +fig.dataset.aqi || 0 },
+          { label: 'Other', value: +fig.dataset.other || 0 }
+        ];
+        const total = portions.reduce((s,p) => s + p.value, 0) || 1;
+        portions.forEach(p => {
+          const item = document.createElement('div');
+          item.className = 'portion-item';
+          const percent = Math.round((p.value/total) * 100);
+          item.innerHTML = `<div class="portion-color"></div>${percent}% ${p.label}`;
+          figcap.appendChild(item);
+        });
+        const pollutionPercent = (portions[0].value/total) * 100;
+        const pollenPercent = (portions[1].value/total) * 100;
+        const aqiPercent = (portions[2].value/total) * 100;
+        const chart = fig.querySelector('.chart-data__container');
+        chart.style.background = `conic-gradient(#0000ff 0% ${pollutionPercent}%, #002966 ${pollutionPercent}% ${pollutionPercent + pollenPercent}%, #377B2B ${pollutionPercent + pollenPercent}% ${pollutionPercent + pollenPercent + aqiPercent}%, #7AC142 ${pollutionPercent + pollenPercent + aqiPercent}% 100%)`;
+      }
+    });
+  }
+
+  // routesSelect -> instruments/manufacturers -> top
+  if (routesSelect) {
+    routesSelect.addEventListener('change', async (e) => {
+      const route = e.target.value;
+      if (route === 'countries') {
+        if (dynamicSelect) dynamicSelect.style.display = 'none';
+        countriesSelect.style.display = '';
+        return;
+      }
+      countriesSelect.style.display = 'none';
+      const ds = ensureDynamicSelect();
+      ds.disabled = true;
+      ds.style.display = '';
+      ds.innerHTML = '<option>Loading...</option>';
+      try {
+        const json = await fetchJson('/api/' + route);
+        const items = json.results || json || [];
+        if (route === 'instruments') {
+          populateSelect(ds, items, i => i.name || i.model || `Instrument ${i.id || ''}`, i => i.id ?? i.name ?? '', i => ({ id: i.id }));
+        } else if (route === 'manufacturers') {
+          populateSelect(ds, items, i => i.name || `Manufacturer ${i.id || ''}`, i => i.id ?? i.name ?? '', i => ({ id: i.id }));
+        } else {
+          populateSelect(ds, items, i => i.name || i.code || JSON.stringify(i), i => i.id ?? i.name ?? '');
+        }
+        ds.disabled = false;
+        ds.addEventListener('change', () => {
+          const opt = ds.selectedOptions[0];
+          if (!opt || !opt.value) return;
+          clearSection(topContent);
+          hideImage(topImage);
+          showSection(topContent);
+          topContent.innerHTML = `<h2>${opt.textContent}</h2><p><small>id: ${opt.dataset.id || 'n/a'}</small></p>`;
+        });
+      } catch (err) {
+        ds.innerHTML = '<option value="">Failed to load</option>';
+        ds.disabled = true;
+        console.error('fetch failed', err);
+      }
+    });
+  }
+
+  // Search form -> bottom weather
+  if (searchForm) {
+    searchForm.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      const location = (searchInput.value || '').trim();
+      if (!location) { if (searchError) searchError.textContent = 'Require location'; searchInput.classList.add('error'); return; }
+      try {
+        const res = await fetch('/api/search/' + encodeURIComponent(location));
+        if (!res.ok) throw new Error('Network error');
+        const data = await res.json();
+        clearSection(bottomContent);
+        hideImage(bottomImage);
+        showSection(bottomContent);
+        const temperature = data.temperature ?? data.temp ?? '25.6 C';
+        const condition = data.description ?? data.condition ?? 'Few clouds';
+        const humidity = data.humidity ?? data.rh ?? '49%';
+        const windSpeed = data.wind_speed ?? data.windSpeed ?? '4 m/s';
+        bottomContent.innerHTML = `
+          <h2>City Weather Lookup</h2>
+          <p><strong>Temperature: </strong>${temperature}</p>
+          <p><strong>Condition: </strong>${condition}</p>
+          <p><strong>Humidity: </strong>${humidity}</p>
+          <p><strong>Wind Speed: </strong>${windSpeed}</p>
+        `;
+      } catch (err) {
+        console.error(err);
+        if (searchError) searchError.textContent = 'Failed to fetch weather';
+      }
+    });
+  }
+
+  // initial state
+  clearSection(topContent);
+  clearSection(bottomContent);
+  clearSection(pieContent);
+  showImage(topImage);
+  showImage(bottomImage);
+  showImage(pieImage);
 });
-
-// 2. Update the Weather Section
-function updateWeatherSection(weather) {
-  const weatherSection = document.getElementById('bottom-data__section');
-
-  weatherSection.innerHTML = `
-    <div class="info-data__container">
-      <h2>City Weather Lookup</h2>
-      <p><strong>Temperature:</strong> ${weather.temperature}°C</p>
-      <p><strong>Condition:</strong> ${weather.condition}</p>
-      <p><strong>Humidity:</strong> ${weather.humidity}%</p>
-      <p><strong>Wind Speed:</strong> ${weather.wind_speed} m/s</p>
-    </div>
-  `;
-}
-
-// 3. Update the AQI Section
-function updateAQISection(aqi) {
-  const aqiSection = document.getElementById('top-data__section');
-
-  aqiSection.innerHTML = `
-    <div class="info-data__container">
-      <h2>Air Quality Index (AQI)</h2>
-      <p><strong>Status:</strong> ${aqi.status}</p>
-      <p><strong>Tree pollen:</strong> ${aqi.tree_pollen}</p>
-      <p><strong>Grass pollen:</strong> ${aqi.grass_pollen}</p>
-    </div>
-  `;
-}
-
-// 4. Update the Pie Chart
-function updatePieChart(chartData, location, status, message) {
-  const pie = document.getElementById("pie-data__container");
-
-  // Update data attributes
-  pie.dataset.pollution = chartData.pollution;
-  pie.dataset.pollen = chartData.pollen;
-  pie.dataset.aqi = chartData.aqi;
-  pie.dataset.other = chartData.other; // match HTML attribute name
-
-  // Update location info
-  document.getElementById("location").textContent = location.city;
-  document.getElementById("region").textContent = location.region;
-  document.getElementById("status").textContent = status;
-  document.getElementById("message").textContent = message;
-
-  const total = chartData.pollution + chartData.pollen + chartData.aqi + chartData.other;
-  const pollutionPercent = (chartData.pollution / total) * 100;
-  const pollenPercent = (chartData.pollen / total) * 100;
-  const aqiPercent = (chartData.aqi / total) * 100;
-  const otherPercent = (chartData.other / total) * 100;
-
-  // Update chart gradient
-  const chart = pie.querySelector(".chart-data__container");
-  chart.style.background = `conic-gradient(
-    #0000ff 0% ${pollutionPercent}%,
-    #002966 ${pollutionPercent}% ${pollutionPercent + pollenPercent}%,
-    #377B2B ${pollutionPercent + pollenPercent}% ${pollutionPercent + pollenPercent + aqiPercent}%,
-    #7AC142 ${pollutionPercent + pollenPercent + aqiPercent}%
-  )`;
-
-  // Update center label
-  const label = chart.querySelector(".chart-label");
-  label.textContent = "100%";
-
-  // Update chart labels
-const figcaption = document.querySelector(".portions-data__container");
-  figcaption.innerHTML = `
-    <div class="portion-item"><div class="portion-color"></div>${pollutionPercent.toFixed(1)}% Pollution</div>
-    <div class="portion-item"><div class="portion-color"></div>${pollenPercent.toFixed(1)}% Pollen</div>
-    <div class="portion-item"><div class="portion-color"></div>${aqiPercent.toFixed(1)}% AQI</div>
-    <div class="portion-item"><div class="portion-color"></div>${otherPercent.toFixed(1)}% Other</div>
-  `;
-}
-
-// 5. Optional: Hide the intro image on search
-function hideCoverImage() {
-  const cover = document.getElementById('cover-image');
-  if (cover) cover.style.display = 'none';
-}

@@ -129,7 +129,7 @@ async function handleSubmit(e) {
     submitBtn.textContent = "Submitting...";
 
     try {
-      const response = await fetch("http://localhost:4000/api/subscription", {
+      const response = await fetch("/api/subscription", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -11,9 +11,15 @@ const path = require('path');
 const app = express();
 
 const FRONTEND_DIR = path.join(__dirname, '..', 'frontend');
-app.use('/css', express.static(path.join(FRONTEND_DIR, 'css')));
-app.use('/js', express.static(path.join(FRONTEND_DIR, 'js')));
-app.use('/img', express.static(path.join(FRONTEND_DIR, 'img')));
+// serve the whole frontend tree at /frontend/*
+app.use('/frontend', express.static(FRONTEND_DIR));
+
+// (optional) also expose specific subfolders explicitly
+app.use('/frontend/css',    express.static(path.join(FRONTEND_DIR, 'css')));
+app.use('/frontend/js',     express.static(path.join(FRONTEND_DIR, 'js')));
+app.use('/frontend/img',    express.static(path.join(FRONTEND_DIR, 'img')));
+app.use('/frontend/html',   express.static(path.join(FRONTEND_DIR, 'html')));
+app.use('/frontend/html/images', express.static(path.join(FRONTEND_DIR, 'html', 'images')));
 
 app.get('/', (req, res) => {
   const indexPath = path.join(__dirname, '..', 'index.html');

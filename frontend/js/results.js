@@ -85,7 +85,7 @@ document.getElementById('searchForm').addEventListener('submit', async function 
   if (!city) return alert('Please enter a city');
 
   try {
-    const response = await fetch(`http://localhost:5000/api/search/${encodeURIComponent(city)}`);
+    const response = await fetch(`/api/search/${encodeURIComponent(city)}`);
     if (!response.ok) throw new Error('City not found');
 
     const data = await response.json();

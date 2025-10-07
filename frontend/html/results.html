@@ -52,7 +52,6 @@
         <section id="search-section">
             <h1 id="header__title">Air Quality Data</h1>
             <form id="searchForm">
-
                 <input type="search" id="search-bar" placeholder="Enter location..." />
                 <button type="submit" id="search-btn">Search</button>
                 <p id="search-error" class="error-message"></p>
@@ -66,6 +65,7 @@
             <div class="info-data__container">
                 <img src="/frontend/img/aqi.jpg" alt="AQI cloud clipart image" class="clipart-Icon">
                 <div class="content-placeholder" id="top-content" style="display:none"></div>
+                <p>Air Quality Index (AQI), a standardized metric that quantifies air pollution on a scale from 0 to 500, indicating overall air quality and its corresponding status in your area.</p>
             </div>
         </section>
 
@@ -84,9 +84,17 @@
             <div class="info-data__container">
                 <img src="/frontend/img/bluePie.png" alt="Blue pie chart clipart image" id="clipart-pie">
                 <div class="content-placeholder" id="pie-content" style="display:none"></div>
-                <p>PM2.5 air quality refers to the amount of fine particulate matter (PM), which consists of microscopic particles less than 2.5 micrometers in diameter, in the air. 
-                    These tiny, inhalable particles, including smoke, dust, and aerosols, are the most dangerous type of PM because they can penetrate deep into the lungs and may even enter the bloodstream. </p>
-            </div>
+                
+                <h2 class="header__infoContent">Air Quality and Your Health</h2>
+                <p>The air in your area can affect everyone, especially older adults and young children who may have trouble breathing when pollution levels are high. 
+                    By staying aware of your local air quality, you can help protect your loved ones and your community from health risks linked to air pollution.</p>
+                <h2 class="header__infoContent">Common Air Pollutants:</h2>
+                <ul>
+                    <li><strong>Nitrogen Dioxide (NO₂): </strong>Can irritate the lungs and make breathing harder, especially for people with asthma or respiratory issues.</li>
+                    <li><strong>Nitric Oxide (NO): </strong>An invisible gas that can turn into nitrogen dioxide and contribute to fog and poor air quality.</li>
+                    <li><strong>Particulate Matter (PM₁₀): </strong>Tiny particles of dust, dirt, or liquid droplets in the air that can enter your lungs and cause health problems.</li>
+                    <li><strong>Carbon Monoxide (CO): </strong>A colorless, odorless gas that limits the amount of oxygen your body receives, often coming from car exhaust or burning fuels.</li>
+                </ul>
          </section>
         </div>
     </main>

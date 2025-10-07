@@ -128,6 +128,17 @@ body {
 #message{
     font-size: 16px;
 }
+.header__infoContent{
+    padding-top: 0.8em;
+}
+.info-data__container p, ul{
+    color: black;
+    font-size: 16px;
+}
+.info-data__container ul {
+    list-style-type: none;
+    text-align: left;
+}
 
 /* Table Responsive Styles */
 @media (min-width: 768px) and (max-width: 1024px){
@@ -152,6 +163,9 @@ body {
     #clipart-pie img {
         width: 80%;           
         height: auto;         
+    }
+    .info-data__container p, ul{
+    font-size: 18px;
     }
 }
 
@@ -196,6 +210,8 @@ body {
         width: auto;
         height: 45em;
         max-width: 400px;
-        
+    }
+    .info-data__container p, ul{
+        font-size: 20px;
     }
 }

@@ -160,7 +160,7 @@ function updatePieChart(chartData, location, status, message) {
     #0000ff 0% ${pollutionPercent}%,
     #002966 ${pollutionPercent}% ${pollutionPercent + pollenPercent}%,
     #377B2B ${pollutionPercent + pollenPercent}% ${pollutionPercent + pollenPercent + aqiPercent}%,
-    #7AC142 ${pollutionPercent + pollenPercent + aqiPercent}% 100%
+    #7AC142 ${pollutionPercent + pollenPercent + aqiPercent}%
   )`;
 
   // Update center label

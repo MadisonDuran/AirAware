@@ -212,17 +212,11 @@ searchForm.addEventListener("submit", async function (e) {
         console.error("Search error:", err);
       });
   } else if (type === "countries") {
-    endpoint = `/api/countries?search=${encodeURIComponent(
-      query
-    )}`;
+    endpoint = `/api/countries?search=${encodeURIComponent(query)}`;
   } else if (type === "instruments") {
-    endpoint = `/api/instruments?search=${encodeURIComponent(
-      query
-    )}`;
+    endpoint = `/api/instruments?search=${encodeURIComponent(query)}`;
   } else if (type === "manufacturers") {
-    endpoint = `/api/manufacturers?search=${encodeURIComponent(
-      query
-    )}`;
+    endpoint = `/api/manufacturers?search=${encodeURIComponent(query)}`;
   }
   if (endpoint && type !== "countries") {
     fetch(endpoint)
@@ -476,8 +470,16 @@ function showOpenAQResults(data, type, selected) {
     card.className = "country-card";
 
     let countryCodeDisplay = "-";
-    if (typeof loc.country === "string") countryCodeDisplay = loc.country;
-    else if (loc.country?.code) countryCodeDisplay = loc.country.code;
+    if (typeof loc.country === "string") {
+      countryCodeDisplay = loc.country;
+    } else if (
+      loc.country &&
+      typeof loc.country === "object" &&
+      loc.country.code
+    ) {
+      countryCodeDisplay = loc.country.code;
+    }
+    summaryHtml += `<p><strong>Country Code:</strong> ${countryCodeDisplay}</p>`;
 
     card.innerHTML = `
       <h3>${loc.name || loc.location || "Unknown"}</h3>

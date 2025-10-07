@@ -4,7 +4,7 @@ const axios = require('axios');
 const cors = require('cors');
 const supabase = require('./supabaseClient');
 require('dotenv').config();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000;
 
 const path = require('path');
 

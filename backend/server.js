@@ -26,30 +26,9 @@ app.get('/', (req, res) => {
   res.sendFile(indexPath);
 });
 
-
+app.use(cors());
 app.use(express.json());
-// Allow both Live Server origins
-const allowedOrigins = [
-  'http://127.0.0.1:5500',
-  'http://localhost:5500',
-  'https://airaware-odf6.onrender.com'
-];
 
-const corsOptions = {
-  origin(origin, cb) {
-    if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
-    return cb(new Error('Not allowed by CORS'));
-  },
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  optionsSuccessStatus: 200,
-};
-
-// Attach CORS
-app.use(cors(corsOptions));
-
-// IMPORTANT for Express 5: handle preflight explicitly with a regex (not '*')
-app.options(/.*/, cors(corsOptions));
 
 // Test route (make sure server responds)
 app.get('/api/test', (req, res) => {

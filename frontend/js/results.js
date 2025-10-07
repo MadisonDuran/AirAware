@@ -136,6 +136,11 @@ function updateAQISection(aqi) {
 function updatePieChart(chartData, location, status, message) {
   const pie = document.getElementById("pie-data__container");
 
+  // Ensure pie exists before proceeding
+  if (!pie) {
+    console.error("Error: Pie chart container not found.");
+    return; // Exit if the element is not found
+  }
   // Update data attributes
   pie.dataset.pollution = chartData.pollution;
   pie.dataset.pollen = chartData.pollen;

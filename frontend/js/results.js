@@ -12,13 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchError = document.getElementById('search-error');
   const filterDetails = document.getElementById('filter-details');
 
-  const topContent = document.getElementById('top-content');
-  const bottomContent = document.getElementById('bottom-content');
-  const pieContent = document.getElementById('pie-content');
-  const topImage = document.querySelector('#top-data__section .clipart-Icon');
-  const bottomImage = document.querySelector('#bottom-data__section .clipart-Icon');
-  const pieImage = document.getElementById('clipart-pie');
-
   let dynamicSelect = null;
 
   function clearSection(el) { if (!el) return; el.innerHTML = ''; el.style.display = 'none'; }
@@ -58,56 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return res.json();
   }
 
-  // Countries -> pie
-  if (countriesSelect) {
-    countriesSelect.addEventListener('change', (e) => {
-      const val = e.target.value;
-      if (!val) return;
-      searchInput.value = val;
-      clearSection(pieContent);
-      hideImage(pieImage);
-      showSection(pieContent);
-
-      const locationName = val;
-      const region = e.target.selectedOptions[0]?.textContent || '';
-      const pieValues = { pollution: 60, pollen: 30, aqi: 10, other: 5 };
-
-      pieContent.innerHTML = `
-        <h2 id="location">${locationName}</h2>
-        <h3 id="region">${region}</h3>
-        <figure id="pie-data__container" data-pollution="${pieValues.pollution}" data-pollen="${pieValues.pollen}" data-aqi="${pieValues.aqi}" data-other="${pieValues.other}">
-          <div class="chart-data__container"><div class="chart-label">100%</div></div>
-        </figure>
-        <figcaption class="portions-data__container"></figcaption>
-        <h3 id="status">Good</h3>
-        <p id="message">You can breathe easily in this area</p>
-      `;
-
-      const fig = pieContent.querySelector('#pie-data__container');
-      const figcap = pieContent.querySelector('.portions-data__container');
-      if (fig && figcap) {
-        const portions = [
-          { label: 'Pollution', value: +fig.dataset.pollution || 0 },
-          { label: 'Pollen', value: +fig.dataset.pollen || 0 },
-          { label: 'AQI', value: +fig.dataset.aqi || 0 },
-          { label: 'Other', value: +fig.dataset.other || 0 }
-        ];
-        const total = portions.reduce((s,p) => s + p.value, 0) || 1;
-        portions.forEach(p => {
-          const item = document.createElement('div');
-          item.className = 'portion-item';
-          const percent = Math.round((p.value/total) * 100);
-          item.innerHTML = `<div class="portion-color"></div>${percent}% ${p.label}`;
-          figcap.appendChild(item);
-        });
-        const pollutionPercent = (portions[0].value/total) * 100;
-        const pollenPercent = (portions[1].value/total) * 100;
-        const aqiPercent = (portions[2].value/total) * 100;
-        const chart = fig.querySelector('.chart-data__container');
-        chart.style.background = `conic-gradient(#0000ff 0% ${pollutionPercent}%, #002966 ${pollutionPercent}% ${pollutionPercent + pollenPercent}%, #377B2B ${pollutionPercent + pollenPercent}% ${pollutionPercent + pollenPercent + aqiPercent}%, #7AC142 ${pollutionPercent + pollenPercent + aqiPercent}% 100%)`;
-      }
-    });
-  }
 
   // routesSelect -> instruments/manufacturers -> top
   if (routesSelect) {

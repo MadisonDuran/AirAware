@@ -23,7 +23,7 @@ AirAware is a full-stack web application designed to promote environmental aware
 
 ---
 ## Check Out the Demo:
-Live Demo: [insert render link]
+Live Demo: https://airaware-odf6.onrender.com
 
 ---
 ## Setup & Installation

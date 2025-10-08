@@ -68,20 +68,17 @@
         <!-- Context data from the API -->
         <div class="data-wrapper__content">
         <!-- Air Quality Index Section -->
-        <section id="top-data__section">
+        <section id="top-left__section">
             <div class="info-data__container">
                 <h2>Air Quality Index (AQI)</h2>
-                <p><strong>Status:</strong> High</p>
-                <p><strong>Tree pollen:</strong> 150 (High)</p>
-                <p><strong>Grass pollen:</strong> 80 (Moderate)</p>
-                <img src="/frontend/img/aqi.jpg" alt="AQI cloud clipart image" class="clipart-Icon">
-                <div class="content-placeholder" id="top-content" style="display:none"></div>
+                <img src="/frontend/img/aqi.jpg" alt="AQI cloud clipart image" class="images-content">
+                <div class="content-placeholder" id="top-content"></div>
                 <p>Air Quality Index (AQI), a standardized metric that quantifies air pollution on a scale from 0 to 500, indicating overall air quality and its corresponding status in your area.</p>
             </div>
         </section>
 
         <!-- Countries Section -->
-        <section id="bottom-data__section">
+        <section id="bottom-left__section">
             <div class="info-data__container">
                 <h2>City Weather Lookup</h2>
                 <p><strong>Temperature: </strong>25.6 C</p>
@@ -91,38 +88,9 @@
             </div>
         </section>
 
-        <!-- Pie Chart Section -->
-        <section id="pie-results__section">
-            <!-- Startpoint of the Chart --> 
+        <!-- Air Quality Health Section -->
+        <section id="top-right__section">
             <div class="info-data__container">
-                <h2 id="location">Charlotte</h2>
-                <h3 id="region">North Carolina</h3>
-            
-            <!-- Pie Chart -->
-            <figure id ="pie-data__container"
-                    data-pollution="60"
-                    data-pollen="30"
-                    data-aqi="10"
-                    data-other="5">
-                <div class="chart-data__container">
-                    <div class="chart-label" id="chart-label">100%</div>
-                </div>
-            </figure>
-            <!-- The data/labels items -->
-            <figcaption class="portions-data__container">
-                <div class="portion-item"><div class="portion-color"></div>60% Pollution</div>
-                <div class="portion-item"><div class="portion-color"></div>30% Pollen</div>
-                <div class="portion-item"><div class="portion-color"></div>10% AQI</div>
-                <div class="portion-item"><div class="portion-color"></div>5% Other</div>
-            </figcaption>
-            <!-- Endpoint of the Chart -->    
-            
-                <h3 id="status">Good</h3>
-                <p id="message">You can breathe easily in this area</p>
-            </div>
-                <img src="/frontend/img/bluePie.png" alt="Blue pie chart clipart image" id="clipart-pie">
-                <div class="content-placeholder" id="pie-content" style="display:none"></div>
-                
                 <h2 class="header__infoContent">Air Quality and Your Health</h2>
                 <p>The air in your area can affect everyone, especially older adults and young children who may have trouble breathing when pollution levels are high. 
                     By staying aware of your local air quality, you can help protect your loved ones and your community from health risks linked to air pollution.</p>
@@ -134,6 +102,14 @@
                     <li><strong>Carbon Monoxide (CO): </strong>A colorless, odorless gas that limits the amount of oxygen your body receives, often coming from car exhaust or burning fuels.</li>
                 </ul>
          </section>
+
+        <!-- Table Image Section -->
+        <section id="bottom-right__section">
+            <div class="info-data__container">
+                <h2>Air Quality Parameter </h2>
+                <img src="/frontend/img/table-parameter.png" alt="table parameter chart" class="images-content">
+            </div>
+        </section>
         </div>
     </main>
 
